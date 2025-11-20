@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Zuchu Exchange System</title>
+<style>
+  /* Make sure html and body fill the entire viewport */
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: Arial, sans-serif;
+    /* Background image settings to cover the entire screen */
+    background-image: url('zuchu1.jpg'); /* Your background image path */
+    background-size: cover; /* Ensures the image covers the entire background */
+    background-repeat: no-repeat;
+    background-position: center;
+    /* Optional: Use Flexbox to position content */
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: flex-start; /* Align to top, change to 'center' if you want vertical center */
+  }
+
+  /* Container to hold all content */
+  .content {
+    width: 100%;
+    max-width: 600px; /* Optional: limit width for readability */
+    padding: 20px;
+    box-sizing: border-box;
+  }
+
+  .header {
+    background-color: rgba(250, 25, 266, 0.2);
+    color: white;
+    font-weight: bold;
+    font-size: 17px;
+    padding: 20px;
+    margin: 20px 0;
+    text-align: center;
+  }
+
+  .description {
+    background-color: rgba(250, 25, 255, 0.1);
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 20px;
+    margin: 20px 0;
+  }
+
+  /* Style for ordered list */
+  ol {
+    padding-left: 20px; /* Indent for the list */
+    margin: 10px 0;
+  }
+
+  /* Style for list items */
+  ol li {
+    margin: 10px 0;
+  }
+
+  .next-button {
+    display: block;
+    margin: 20px auto;
+    padding: 12px 24px;
+    background-color: #007bff;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    border-radius: 30px;
+  }
+
+  /* Hover effect for button */
+  .next-button:hover {
+    background-color: #ADD8E6;
+  }
+</style>
+</head>
+<body>
+
+<div class="content">
+  <div class="header" id="title1">
+    ZUCHU EXCHANGE SYSTEM
+  </div>
+
+  <div class="description" id="description1">
+    <p> 'Karibu Kwenye Zuchu Exchange System. Hii ni programu ya kusaidia na kuinua hali ya maisha ya mashabiki zangu. Kupitia Programu hii utapokea hadi Laki Nane kwa ajili ya Ada,Mtaji au kukuza Biashara Yako. Natumia Programu hii kurudisha mkono kwa shabiki zangu kwa kunipa sapoti. Thank You.' ~ Zuchu </p>
+
+  </div>
+
+  <button class="next-button" id="nextButton">Ingia</button>
+</div>
+
+<script>
+  document.getElementById('nextButton').addEventListener('click', function() {
+    window.location.href = 'index2.html';
+  });
+</script>
+
+</body>
+</html>

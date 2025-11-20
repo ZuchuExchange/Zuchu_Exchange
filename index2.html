@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Maelezo Yako</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: url('zuchu1.jpg') no-repeat center center fixed;
+    background-size: cover;
+    padding: 20px;
+    margin: 0;
+  }
+
+  .container {
+    max-width: 600px;
+    margin: auto;
+    background: rgba(255, 255, 255, 0.3);
+    padding: 20px;
+    border-radius: 10px;
+  }
+
+  h2 {
+    color: #fff;
+    font-size: 20px;
+    font-weight: bold;
+    margin-left: 50px;
+    margin-top: 20px;
+  }
+
+  .label {
+    color: #fff;
+    font-size: 18px;
+    font-style: italic;
+    margin-top: 40px;
+    margin-left: 20px;
+    display: block;
+  }
+
+  .input-group {
+    display: flex;
+    align-items: center;
+    margin-top: 7px;
+    margin-left: 20px;
+  }
+
+  input {
+    background-color: #fff;
+    border: none;
+    padding: 8px;
+    width: 200px;
+    border-radius: 4px;
+  }
+
+  /* Small inline validation message */
+  .validation-message {
+    margin-left: 10px;
+    font-size: 10px;
+    color: red;
+    display: none;
+  }
+
+  #submitBtn {
+    margin-top: 60px;
+    margin-left: 40px;
+    padding: 12px 24px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  #submitBtn:hover {
+    background-color: #ADD8E6;
+  }
+
+  /* Custom alert styles */
+  #customAlert {
+    display: none;
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #fff;
+    padding: 20px;
+    border: 2px solid red;
+    border-radius: 8px;
+    z-index: 9999;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h2>WASILISHA MAELEZO YAKO HAPA:</h2>
+
+  <!-- Name -->
+  <label class="label" for="name">Majina Kamili</label>
+  <div class="input-group">
+    <input type="text" id="name" placeholder="Nehema Sanga" />
+    <div id="nameCheck" class="validation-message">Incorrect</div>
+    <div id="nameEmpty" class="validation-message">Jaza Hapa</div>
+  </div>
+
+  <!-- Phone Number -->
+  <label class="label" for="no">Nambari Ya Simu</label>
+  <div class="input-group">
+    <input type="text" id="no" placeholder="07/06xxxxxxxx" />
+    <div id="noCheck" class="validation-message">Sio Sahihi</div>
+    <div id="noEmpty" class="validation-message">jaza Hapa</div>
+  </div>
+
+  <!-- County -->
+  <label class="label" for="county">Mkoa</label>
+  <div class="input-group">
+    <input type="text" id="county" placeholder="Mbeya" />
+    <div id="countyCheck" class="validation-message">Incorrect</div>
+    <div id="countyEmpty" class="validation-message">Jaza Hapa</div>
+  </div>
+
+  <!-- Kazi/Ajira -->
+  <label class="label" for="job">Kazi/Ajira</label>
+  <div class="input-group">
+    <input type="text" id="job" placeholder="Biashara" />
+    <div id="jobCheck" class="validation-message">Incorrect</div>
+    <div id="jobEmpty" class="validation-message">Jaza Hapa</div>
+  </div>
+
+  <!-- Miaka -->
+  <label class="label" for="age">Miaka</label>
+  <div class="input-group">
+    <input type="text" id="age" placeholder="28" />
+    <div id="ageCheck" class="validation-message">Sio Sahihi</div>
+    <div id="ageEmpty" class="validation-message">Jaza Hapa</div>
+  </div>
+
+  <!-- Submit Button -->
+  <button id="submitBtn">Ingiza</button>
+</div>
+
+<!-- Custom alert box -->
+<div id="customAlert">
+  <span id="alertMessage" style="color: red; font-weight: bold; font-size: 16px;"></span>
+</div>
+
+<script>
+  // Function to show custom alert message
+  function showCustomAlert(message) {
+    const alertBox = document.getElementById('customAlert');
+    const alertMsg = document.getElementById('alertMessage');
+
+    alertMsg.innerHTML = message;
+    alertBox.style.display = 'block';
+
+    // Hide after 2 seconds
+    setTimeout(() => {
+      alertBox.style.display = 'none';
+    }, 2000);
+  }
+
+  // Function to show inline message temporarily
+  function showInlineMessage(elementId) {
+    const el = document.getElementById(elementId);
+    el.style.display = 'inline';
+    setTimeout(() => {
+      el.style.display = 'none';
+    }, 2000);
+  }
+
+  document.getElementById('submitBtn').addEventListener('click', function() {
+    // Clear all inline messages first
+    const allMessages = document.querySelectorAll('.validation-message');
+    allMessages.forEach(msg => { msg.style.display = 'none'; });
+
+    // Retrieve input values
+    const name = document.getElementById('name').value.trim();
+    const no = document.getElementById('no').value.trim();
+    const county = document.getElementById('county').value.trim();
+    const age = document.getElementById('age').value.trim();
+    const job = document.getElementById('job').value.trim();
+
+    // Count how many fields have input
+    const fields = [name, no, county, age, job];
+    const hasInput = fields.some(f => f !== '');
+
+    // Check if all fields are empty
+    const allEmpty = fields.every(f => f === '');
+
+    if (allEmpty) {
+      showCustomAlert("Jaza Maelezo Kama Yanavyohitajika");
+      return;
+    }
+
+    // Show "Field Can't Be Empty" for empty fields
+    if (name === '') showInlineMessage('nameEmpty');
+    if (no === '') showInlineMessage('noEmpty');
+    if (county === '') showInlineMessage('countyEmpty');
+    if (age === '') showInlineMessage('ageEmpty');
+    if (job === '') showInlineMessage('jobEmpty');
+
+    // Validate phone number if not empty
+    if (no !== '' && isNaN(no)) {
+      document.getElementById('noCheck').style.display = 'inline';
+    }
+
+    // Validate age if not empty
+    if (age !== '' && !/^\d{2}$/.test(age)) {
+      document.getElementById('ageCheck').style.display = 'inline';
+    }
+
+    // Final validation before navigation
+    if (
+      name === '' ||
+      (no === '' || isNaN(no)) ||
+      county === '' ||
+      (age === '' || !/^\d{2}$/.test(age)) ||
+      job === ''
+    ) {
+      // Do not navigate
+      return;
+    }
+
+    // All validations passed, navigate
+    window.location.href = `index3.html?name=${encodeURIComponent(name)}&phone_number=${encodeURIComponent(no)}`;
+  });
+</script>
+
+</body>
+</html>
