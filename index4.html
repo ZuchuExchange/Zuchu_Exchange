@@ -72,7 +72,7 @@ const phoneNumber = getQueryParam('phone_number') || 'Hakuna Namba';
 // Construct the instruction message with extra blank lines after each line
 const instructionText = `Hongera ${name}(${phoneNumber}) Umechaguliwa Kupokea Tsh200,000.
 
-Unatakiwa Kulipia Tsh3000, Ada Ya Utoaji Ili Upokee Ofa Yako.  
+Unatakiwa Kulipia Tsh5000, Ada Ya Utoaji Ili Upokee Ofa Yako.  
 
 Fuata Maelezo Haya Ili Ufanye Malipo Yako. Malipo Yanafanywa kwenye Nambari Rasmi Ya katibu (Amos Cosmas Paulo).
 
@@ -88,7 +88,7 @@ Nambari Ya Malipo Hii Hapa. Thibitisha Nambari Usije Ukakosea.
 
                 Mtandao: Vodacom
 
-                Kiasi: 3000`;
+                Kiasi: 5000`;
 
 // Display the message
 document.getElementById('payText').textContent = instructionText;
@@ -100,4 +100,5 @@ document.getElementById('backButton').addEventListener('click', () => {
 </script>
 
 </body>
+
 </html>
