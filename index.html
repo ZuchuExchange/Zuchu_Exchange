@@ -1,42 +1,75 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Zuchu Exchange System</title>
+<title>Zuchu Exchange Mkopo</title>
 <link rel="icon" href="favicon.ico" type="image/x-icon" />
-  
+
 <style>
-  /* Make sure html and body fill the entire viewport */
+  /* Reset default margins and paddings */
   html, body {
     height: 100%;
     margin: 0;
     padding: 0;
   }
 
+  /* Style for the body with background image and centered content */
   body {
     font-family: Arial, sans-serif;
-    /* Background image settings to cover the entire screen */
-    background-image: url('zuchu1.jpg'); /* Your background image path */
-    background-size: cover; /* Ensures the image covers the entire background */
+    background-image: url('zuchu1.jpg');
+    background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    /* Optional: Use Flexbox to position content */
+    background-attachment: fixed;
     display: flex;
-    justify-content: center; /* Center horizontally */
-    align-items: flex-start; /* Align to top, change to 'center' if you want vertical center */
+    justify-content: center;
+    align-items: flex-start;
+    height: 100vh;
+    overflow: auto;
+    position: relative; /* for absolutely positioned buttons */
   }
 
-  /* Container to hold all content */
+  /* Container for all content with internal scrolling if needed */
   .content {
+    max-height: 100vh;
+    overflow-y: auto;
     width: 100%;
-    max-width: 600px; /* Optional: limit width for readability */
+    max-width: 600px;
     padding: 20px;
     box-sizing: border-box;
   }
 
+  /* Left buttons container - closer together and aligned on same vertical line */
+  .nav-buttons {
+    position: fixed;
+    top: 15%; /* Slightly below top for better placement */
+    left: 2%;
+    display: flex;
+    flex-direction: column;
+    gap: 4px; /* Closer spacing between buttons */
+    z-index: 9999;
+  }
+
+  /* Style for the buttons */
+  .nav-btn {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 4px;
+    transition: background 0.3s;
+  }
+  .nav-btn:hover {
+    background: rgba(255,255,255,0.2);
+  }
+
+  /* Style for header section */
   .header {
-    background-color: rgba(250, 25, 266, 0.2);
+    background-color: rgba(0, 123, 255, 0.2);
     color: white;
     font-weight: bold;
     font-size: 17px;
@@ -45,26 +78,72 @@
     text-align: center;
   }
 
+  /* Style for description section */
   .description {
-    background-color: rgba(250, 25, 255, 0.1);
+    background-color: rgba(0, 123, 255, 0.1);
     color: white;
     font-size: 15px;
     font-weight: bold;
     padding: 20px;
     margin: 20px 0;
+    position: relative;
   }
 
-  /* Style for ordered list */
-  ol {
-    padding-left: 20px; /* Indent for the list */
-    margin: 10px 0;
+  /* Style for certificate image */
+  .certificate-image {
+    display: block;
+    margin: 15px auto;
+    max-width: 100%;
+    height: auto;
   }
 
-  /* Style for list items */
-  ol li {
-    margin: 10px 0;
+  /* Style for additional text */
+  .additional-text {
+    color: white;
+    font-size: 14px;
+    font-weight: normal;
+    margin: 15px auto;
+    padding: 0 10px;
+    text-align: justify;
   }
 
+  /* Style for black line separator */
+  .black-line {
+    border-top: 2px solid black;
+    margin: 15px 0;
+    width: 100%;
+  }
+
+  /* Style for new section after black line */
+  .new-section {
+    background-color: rgba(0, 123, 255, 0.1);
+    padding: 15px;
+    margin-top: 10px;
+    color: white;
+    font-size: 14px;
+    background: transparent;
+    white-space: pre-wrap;
+  }
+
+  /* Style for the last black line */
+  .last-black-line {
+    border-top: 2px solid black;
+    margin: 20px 0;
+    width: 100%;
+  }
+
+  /* Style for footer message */
+  .footer {
+    background-color: rgba(255, 255, 255, 0.8);
+    color: black;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 12px;
+  }
+
+  /* Style for next button */
   .next-button {
     display: block;
     margin: 20px auto;
@@ -76,35 +155,99 @@
     border: none;
     cursor: pointer;
     border-radius: 30px;
+    transition: background-color 0.3s ease;
   }
-
-  /* Hover effect for button */
   .next-button:hover {
-    background-color: #ADD8E6;
+    background-color: #0056b3;
   }
 </style>
 </head>
 <body>
 
-<div class="content">
+<!-- Navigation buttons fixed on the left, closer together -->
+<div class="nav-buttons">
+  <button class="nav-btn" id="homeBtn">Home</button>
+  <button class="nav-btn" id="contactBtn">Contact</button>
+</div>
+
+<div class="content" id="mainContent">
+  <!-- Header Section -->
   <div class="header" id="title1">
-    ZUCHU EXCHANGE SYSTEM
+    ZUCHU EXCHANGE
   </div>
 
+  <!-- Description Section -->
   <div class="description" id="description1">
-    <p> 'Karibu Kwenye Zuchu Exchange System. Hii ni programu ya kusaidia na kuinua hali ya maisha ya mashabiki zangu. Kupitia Programu hii utapokea hadi Laki Nane kwa ajili ya Ada,Mtaji au kukuza Biashara Yako. Natumia Programu hii kurudisha mkono kwa shabiki zangu kwa kunipa sapoti. Thank You.' ~ Zuchu </p>
-
+    <p>ZUCHU EXCHANGE. Ni kampuni inayotoa Mikopo Kwa njia ya Mtandao (online). Inayolenga kusaidia shabiki zangu na Tanzania. Tunatoa Mikopo NDANI ya dakika 15. Mkopo huu wa dharura tunatoa kupitia hii tovuti yetu unaruhisiwa kuomba Mkopo Kuanzia Laki Mbili 200,000/= Hadi Millioni Kumi 10,000,000/= (Vigezo & masharti kuzingatiwa) Mfuko huu wa Zuchu Exchange umeanzishwa katika mfumo wa intaneti pekee (Online).</p>
+    <div class="black-line"></div>
+    <img src="zuchucert.jpg" alt="Certificate" class="certificate-image" />
+    <div class="black-line"></div>
+    <p class="additional-text">
+      ZUCHU EXCHANGE. Ni tasisi pekee Tanzania tunayoweza kukupatia Mkopo kupitia simu yako ya Mkononi tumewezshwa na sheria Ya miamala ya Electronic ya Tanzania mwaka 2017. Tumesajiliwa Kikamilifu TRA na BRELA namba ya usajili wa Cheti 50-22-65 iliojikita katika kutoa mikopo na ufadhili wa kifedha kwa watu wenye uhitaji Tanzania na zanzibar Utapata Mkopo hadi Million Kumi 10,000,000/=
+    </p>
+    <div class="black-line"></div>
+    <div class="new-section" id="loanDetails">
+      <strong>____VIWANGO VYA MKOPO</strong><br/><br/>
+      UKIHITAJI MKOPO WA LAKIMBILI 200,000 AKIBA NI 22500 MDA WA KUREJESHA MIEZI 4.<br/>
+      MKOPO WA LAKI TATU 300,000 AKIBA 35000 MDA WA KUREJESHA MIEZI 5<br/>
+      MKOPO WA LAKI NNE 400,000 AKIBA 40,000 MDA WA KUREJESHA MIEZI 6<br/>
+      MKOPO WA LAKI TANO 500,000 AKIBA 50,000 MDA WA KUREJESHA MIEZI 7.<br/>
+      MKOPO WA SITA 600,000 AKIBA 60,000 MDA WA KUREJESHA MIEZI 8.<br/>
+      MKOPO WA SABA 700,000 AKIBA 70,000 MDA WA KUREJESHA MIEZI 9<br/>
+      MKOPO WA NANE 800,000 AKIBA 80,000 MDA WA KUREJESHA MIEZI 10.<br/>
+      MKOPO WA TISA 900,000 AKIBA 90,000 MDA WA KUREJESHA MIEZI 11.<br/>
+      MKOPO MILIONI MOJA 1,000,000 AKIBA 100,000 MDA WA KUREJESHA MIAKA 1.<br/>
+      MKOPO MILIONI MBILI 2,000,000 AKIBA 200,000 MDA WA KUREJESHA MIAKA 2.<br/>
+      MKOPO MILIONI TATU 3,000,000 AKIBA 300,000 MDA WA KUREJESHA MIAKA 3.<br/>
+      MKOPO NNE 4,000,000 AKIBA 400,000 MDA WA KUREJESHA MIAKA 4.<br/>
+      MKOPO TANO 5,000,000 AKIBA 500,000 MDA WA KUREJESHA MIAKA 5.<br/>
+      MKOPO SITA 6,000,000 AKIBA 600,000 MDA WA KUREJESHA MIAKA 6.<br/>
+      MKOPO SABA 7,000,000 AKIBA 700,000 MDA WA KUREJESHA MIAKA 7.<br/>
+      MKOPO NANE 8,000,000 AKIBA 800,000 MDA WA KUREJESHA MIAKA 8.<br/>
+      MKOPO TISA 9,000,000 AKIBA 900,000 MDA WA KUREJESHA MIAKA 9.<br/>
+      MKOPO KUMI 10,000,000 AKIBA 1,000,000 MDA WA KUREJESHA MIAKA 10<br/>
+    </div>
+    <div class="black-line"></div>
+    <div class="additional-text">
+      SABABU ZA MALIPO YA AKIBA<br/><br/>
+      Utaratibu wetu kutoka kwenye taasisi Ya Zuchu Exchange ni shart la lazima kwa Kila mhitaji wa Mkopo kuweka Akiba?<br/><br/>
+      1. Malipo haya huwa sehemu ya dhamana (security) ya Mkopo wako<br/><br/>
+      2. Baada ya kulipa akiba unarejesha Mkopo bila riba kwa maana hiyo riba itakatwa katika akiba yako<br/><br/>
+      Marejesho hufanyika Kila mwezi Pia unaruhusiwa kurejesha zaidi ya kiwango ili kuwai kumaliza deni kwa muda mchache
+    </div>
+    <div class="last-black-line"></div>
+    <div class="footer">
+      📍P.o.Box 48210 Block 45<br/> <br />
+      GYMKHANA ,POSTA MPYA,DAR ES SALAAM<br/><br/>
+      Info: ZuchuExchange<br/><br/>
+      Whatsapp number +255788262884<br/><br/>
+      HUDUMA ZETU MASAA 24.
+    </div>
   </div>
+  <!-- Next button -->
+  <button class="next-button" id="nextButton">Jaza Fomu</button>
+</div>
 
-  <button class="next-button" id="nextButton">Ingia</button>
+<!-- Navigation buttons fixed on the left, closer together -->
+<div class="nav-buttons">
+  <button class="nav-btn" id="homeBtn">Home</button>
+  <button class="nav-btn" id="contactBtn">Contact</button>
 </div>
 
 <script>
-  document.getElementById('nextButton').addEventListener('click', function() {
+  // Reload page on Home button click
+  document.getElementById('homeBtn').addEventListener('click', () => {
+    location.reload();
+  });
+  // Scroll to bottom on Contact button click
+  document.getElementById('contactBtn').addEventListener('click', () => {
+    document.getElementById('mainContent').scrollTo({top: document.getElementById('mainContent').scrollHeight, behavior: 'smooth'});
+  });
+  // Next button navigates to index2.html
+  document.getElementById('nextButton').addEventListener('click', () => {
     window.location.href = 'index2.html';
   });
 </script>
 
 </body>
-
 </html>
