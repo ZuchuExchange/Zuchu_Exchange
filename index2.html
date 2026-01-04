@@ -1,8 +1,9 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Fomu</title>
+<title>Maelezo Yako</title>
 <style>
   body {
     font-family: Arial, sans-serif;
@@ -12,715 +13,220 @@
     margin: 0;
   }
 
-  #bigWarning {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: rgba(255,0,0,0.8);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    font-size: 24px;
-    font-weight: bold;
-    color: #fff;
-    z-index: 9999;
-  }
-
-  /* Small overlay warnings for inputs and images */
-  .overlay-warning {
-    position: absolute;
-    top: 0;
-    right: 0;
-    font-size: 12px;
-    background: rgba(255,255,255,0.8);
-    color: red;
-    padding: 2px 4px;
-    border-radius: 3px;
-    display: none;
-    z-index: 10;
-  }
-
-  /* The main container */
   .container {
-    max-width: 800px;
+    max-width: 600px;
     margin: auto;
     background: rgba(255, 255, 255, 0.3);
     padding: 20px;
     border-radius: 10px;
-    color: #fff;
-    position: relative;
   }
 
-  /* Styles as previously defined */
   h2 {
-    font-size: 20px;
-    font-weight: bold;
-    text-align: center;
-    margin-top: 20px;
-  }
-
-  .section-title {
-    font-weight: bold;
-    margin-top: 20px;
-    margin-bottom: 10px;
-    font-size: 18px;
-  }
-
-  ol {
-    padding-left: 20px;
-  }
-
-  hr.black-line {
-    border: none;
-    border-top: 2px solid black;
-    margin: 10px 0;
-  }
-
-  .warning-box {
-    background-color: #000;
     color: #fff;
-    padding: 10px;
-    border-radius: 5px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-top: 10px;
-  }
-  .warning-icon {
     font-size: 20px;
-  }
-  .warning-text {
-    font-size: 14px;
-    line-height: 1.4;
-  }
-
-  /* Inputs and warnings */
-  .input-warning {
-    color: red;
-    font-size: 12px;
-    position: absolute;
-    right: 5px;
-    top: 50%;
-    transform: translateY(-50%);
-    display: none;
-  }
-
-  /* For image upload warning overlay */
-  .image-warning {
-    position: absolute;
-    top: 0;
-    right: 0;
-    font-size: 12px;
-    background: rgba(255,255,255,0.8);
-    color: red;
-    padding: 2px 4px;
-    border-radius: 3px;
-    display: none;
-    z-index: 10;
-  }
-
-  /* Style for radio groups and inputs */
-  .radio-group {
-    display: flex;
-    flex-direction: column;
-  }
-  .radio-option {
-    display: flex;
-    align-items: center;
-    margin-bottom: 8px;
-  }
-  input[type="radio"] {
-    margin-right: 10px;
-  }
-  .required-star {
-    color: red;
-  }
-  .name-section {
-    margin-top: 20px;
-    position: relative;
-  }
-  .name-title {
     font-weight: bold;
-    font-size: 18px;
-    margin-bottom: 10px;
-  }
-  .name-inputs {
-    display: flex;
-    gap: 10px;
-  }
-  .input-block {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    position: relative;
-  }
-  .input-label {
-    font-size: 14px;
-    margin-bottom: 4px;
-  }
-  input[type="text"] {
-    padding: 4px 8px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    width: 100%;
-  }
-
-  /* Full width input with warning */
-  .full-width-input {
-    width: 100%;
-    margin: 0 10px;
-    padding: 4px 8px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-    position: relative;
-  }
-
-  /* Warning beside input fields */
-  .warning-beside {
-    font-size: 12px;
-    color: red;
-    position: absolute;
-    right: 5px;
-    top: 50%;
-    transform: translateY(-50%);
-    display: none;
-  }
-
-  /* Other styles */
-  .makazi-section {
+    margin-left: 50px;
     margin-top: 20px;
   }
-  .makazi-title {
-    font-weight: bold;
-    font-size: 18px;
-    margin-bottom: 8px;
-  }
-  .makazi-input {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .makazi-input-field {
-    flex: 1;
-    padding: 4px 8px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  .sub-label {
-    margin-top: 10px;
-    font-weight: normal;
-  }
-  .kitambulisho-section {
-    margin-top: 20px;
-  }
-  .kitambulisho-title {
-    font-weight: bold;
-    font-size: 18px;
-    margin-bottom: 10px;
-  }
-  .picha-section, .picha-nyuma-section, .picha-halisi-section {
-    margin-top: 20px;
-    position: relative;
-  }
-  .picha-title, .picha-nyuma-title, .picha-halisi-title {
-    font-weight: bold;
-    font-size: 18px;
-    margin-bottom: 10px;
-  }
-  .upload-container {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-top: 10px;
-    position: relative;
-  }
-  .upload-label {
-    font-size: 14px;
-  }
-  .camera-icon {
-    font-size: 20px;
-    cursor: pointer;
-    transition: transform 0.2s;
-  }
-  .camera-icon:hover {
-    transform: scale(1.2);
-  }
-  /* Submit button style */
-  .submit-button {
-    margin-top: 15px;
-    padding: 14px 28px;
-    font-size: 18px;
-    cursor: pointer;
-    border: none;
-    background-color: #66ccff;
+
+  .label {
     color: #fff;
+    font-size: 18px;
+    font-style: italic;
+    margin-top: 40px;
+    margin-left: 20px;
+    display: block;
+  }
+
+  .input-group {
+    display: flex;
+    align-items: center;
+    margin-top: 7px;
+    margin-left: 20px;
+  }
+
+  input {
+    background-color: #fff;
+    border: none;
+    padding: 8px;
+    width: 200px;
+    border-radius: 4px;
+  }
+
+  /* Small inline validation message */
+  .validation-message {
+    margin-left: 10px;
+    font-size: 10px;
+    color: red;
+    display: none;
+  }
+
+  #submitBtn {
+    margin-top: 60px;
+    margin-left: 40px;
+    padding: 12px 24px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  #submitBtn:hover {
+    background-color: #ADD8E6;
+  }
+
+  /* Custom alert styles */
+  #customAlert {
+    display: none;
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #fff;
+    padding: 20px;
+    border: 2px solid red;
     border-radius: 8px;
-    transition: background 0.3s, transform 0.2s;
-  }
-  .submit-button:hover {
-    transform: scale(1.05);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    z-index: 9999;
   }
 </style>
 </head>
 <body>
 
-<div id="bigWarning">Jaza Fomu</div>
+<div class="container">
+  <h2>WASILISHA MAELEZO YAKO HAPA:</h2>
 
-<div class="container" id="formContainer">
-  <div class="content-text">
-    <h2>FOMU YA MKOPO</h2>
-    <p>FOMU YA MKOPO ZUCHU EXCHANGE MIKOPO ONLINE</p>
-    <p>ZINGATIA HAYA KABLA</p>
-    <p>1. Baada ya kujaza fomu utatakiwa kuweka akiba yako ili kupata mkopo.</p>
-    <p>2. Usijaze fomu kama haujakubali vigezo na mashariti ya taasisi.</p>
-    <p>3. Usijaze fomu kama hauna uhakika wa kurejesha pesa utakayokopa kutoka kwetu.</p>
-    <p>4. Uaminifu, kuhakikisha unarejesha kwa wakati bila usumbufu.</p>
-    <p>5. Usijaze fomu kama hauna akiba ya mkopo utakao omba.</p>
-
-    <!-- Loan amount options -->
-    <div class="section-title">CHAGUA KIASI CHA MKOPO KULINGANA NA KIASI CHA AKIBA UNACHOWEZA KUWEKA. <span class="required-star">*</span></div>
-    <div class="radio-group" id="loanAmountOptions">
-      <div class="radio-option">
-        <input type="radio" name="loanAmount" id="amount1" value="200000" />
-        <label for="amount1">UKIHITAJI MKOPO WA LAKIMBILI 200,000 AKIBA NI 22,500 MDA WA KUREJESHA MIEZI 4.</label>
-      </div>
-      <div class="radio-option">
-        <input type="radio" name="loanAmount" id="amount2" value="300000" />
-        <label for="amount2">MKOPO WA LAKI TATU 300,000 AKIBA 35,000 MDA WA KUREJESHA MIEZI 5</label>
-      </div>
-      <div class="radio-option">
-        <input type="radio" name="loanAmount" id="amount3" value="400000" />
-        <label for="amount3">MKOPO WA LAKI NNE 400,000 AKIBA 40,000 MDA WA KUREJESHA MIEZI 6</label>
-      </div>
-      <div class="radio-option">
-        <input type="radio" name="loanAmount" id="amount4" value="500000" />
-        <label for="amount4">MKOPO WA LAKI TANO 500,000 AKIBA 50,000 MDA WA KUREJESHA MIEZI 7</label>
-      </div>
-      <div class="radio-option">
-        <input type="radio" name="loanAmount" id="amount5" value="600000" />
-        <label for="amount5">MKOPO WA LAKI SITA 600,000 AKIBA 60,000 MDA WA KUREJESHA MIEZI 8</label>
-      </div>
-      <div class="radio-option">
-        <input type="radio" name="loanAmount" id="amount6" value="700000" />
-        <label for="amount6">MKOPO WA LAKI SABA 700,000 AKIBA 70,000 MDA WA KUREJESHA MIEZI 9</label>
-      </div>
-      <div class="radio-option">
-        <input type="radio" name="loanAmount" id="amount7" value="800000" />
-        <label for="amount7">MKOPO WA LAKINANE 800,000 AKIBA 80,000 MDA WA KUREJESHA MIEZI 10</label>
-      </div>
-      <div class="radio-option">
-        <input type="radio" name="loanAmount" id="amount8" value="900000" />
-        <label for="amount8">MKOPO WA LAKI TISA 900,000 AKIBA 90,000 MDA WA KUREJESHA MIEZI 11</label>
-      </div>
-      <div class="radio-option">
-        <input type="radio" name="loanAmount" id="amount9" value="1000000" />
-        <label for="amount9">MKOPO MILION MOJA 1,000,000 AKIBA 100,000 MDA WA KUREJESHA MWAKA 1</label>
-      </div>
-      <div class="radio-option">
-        <input type="radio" name="loanAmount" id="amount10" value="2000000" />
-        <label for="amount10">MKOPO WA MILION MBILI 2,000,000 AKIBA 200,000 MDA WA KUREJESHA MIAKA 2</label>
-      </div>
-      <div class="radio-option">
-        <input type="radio" name="loanAmount" id="amount11" value="3000000" />
-        <label for="amount11">MKOPO WA MILION TATU 3,000,000 AKIBA 300,000 MDA WA KUREJESHA MIAKA 3</label>
-      </div>
-      <div class="radio-option">
-        <input type="radio" name="loanAmount" id="amount12" value="4000000" />
-        <label for="amount12">MKOPO WA MILION NNE 4,000,000 AKIBA 400,000 MDA WA KUREJESHA MIAKA 4</label>
-      </div>
-      <div class="radio-option">
-        <input type="radio" name="loanAmount" id="amount13" value="5000000" />
-        <label for="amount13">MKOPO WA MILIONI TANO 5,000,000 AKIBA 500,000 MDA WA KUREJESHA MIAKA 5</label>
-      </div>
-      <div class="radio-option">
-        <input type="radio" name="loanAmount" id="amount14" value="6000000" />
-        <label for="amount14">MKOPO WA MILIONI SITA 6,000,000 AKIBA 600,000 MDA WA KUREJESHA MIAKA 6</label>
-      </div>
-      <div class="radio-option">
-        <input type="radio" name="loanAmount" id="amount15" value="7000000" />
-        <label for="amount15">MKOPO WA MILIONI SABA 7,000,000 AKIBA 700,000 MDA WA KUREJESHA MIAKA 7</label>
-      </div>
-      <div class="radio-option">
-        <input type="radio" name="loanAmount" id="amount16" value="8000000" />
-        <label for="amount16">MKOPO WA MILIONI NANE 8,000,000 AKIBA 800,000 MDA WA KUREJESHA MIAKA 8</label>
-      </div>
-      <div class="radio-option">
-        <input type="radio" name="loanAmount" id="amount17" value="9000000" />
-        <label for="amount17">MKOPO WA MILIONI TISA 9,000,000 AKIBA 900,000 MDA WA KUREJESHA MIAKA 9</label>
-      </div>
-      <div class="radio-option">
-        <input type="radio" name="loanAmount" id="amount18" value="10000000" />
-        <label for="amount18">MKOPO WA MILIONI KUMI 10,000,000 AKIBA 1,000,000 MDA WA KUREJESHA MIAKA 10</label>
-      </div>
-    </div>
-
-    <!-- Black line below signature -->
-    <hr class="black-line" />
-
-    <!-- MAJINA YAKO KAMILI -->
-    <div class="name-section">
-      <div class="name-title"><span class="required-star">*</span> MAJINA YAKO KAMILI</div>
-      <div class="name-inputs" style="display:flex; gap:10px;">
-        <div class="input-block" style="position:relative;">
-          <div class="input-label">Jina La kwanza</div>
-          <input type="text" id="fname" />
-          <div class="input-warning" id="warn-fname">Jaza jina la kwanza</div>
-        </div>
-        <div class="input-block" style="position:relative;">
-          <div class="input-label">Jina La Pili</div>
-          <input type="text" id="lname" />
-          <div class="input-warning" id="warn-lname">Jaza jina la pili</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- UMRI -->
-    <div class="name-section" style="margin-top:20px; position:relative;">
-      <div class="name-title"><span class="required-star">*</span> UMRI</div>
-      <input type="text" id="umri" />
-      <div class="input-warning" id="warn-umri">Jaza umri wako</div>
-    </div>
-
-    <!-- JINSIA -->
-    <div class="name-section" style="margin-top:20px; position:relative;">
-      <div class="name-title"><span class="required-star">*</span> JINSIA YAKO</div>
-      <div class="radio-group">
-        <div class="radio-option">
-          <input type="radio" id="jinsia1" name="jinsia" value="Mwanaume" />
-          <label for="jinsia1">Mwanaume</label>
-        </div>
-        <div class="radio-option">
-          <input type="radio" id="jinsia2" name="jinsia" value="Mwanamke" />
-          <label for="jinsia2">Mwanamke</label>
-        </div>
-      </div>
-      <div class="input-warning" id="warn-jinsia" style="display:none;">Chagua jinsia</div>
-    </div>
-
-    <!-- MAKAZI YAKO -->
-    <div class="makazi-section" style="margin-top:20px; position:relative;">
-      <div class="makazi-title"><span class="required-star">*</span> MAKAZI YAKO</div>
-      <div style="margin-top:10px;">
-        <span class="sub-label">Mtaa</span>
-        <input type="text" id="mtaa" />
-        <div class="input-warning" id="warn-mtaa">Jaza mtaa wako</div>
-      </div>
-      <div style="margin-top:10px;">
-        <span class="sub-label">Kijiji / Mtaa</span>
-        <input type="text" id="kijiji" />
-        <div class="input-warning" id="warn-kijiji">Jaza kijiji/mtaa</div>
-      </div>
-      <div style="margin-top:10px; display:flex; gap:10px;">
-        <div style="flex:1;">
-          <span class="sub-label">Kata</span>
-          <input type="text" id="kata" />
-          <div class="input-warning" id="warn-kata">Jaza kata</div>
-        </div>
-        <div style="flex:1;">
-          <span class="sub-label">Wilaya</span>
-          <input type="text" id="wilaya" />
-          <div class="input-warning" id="warn-wilaya">Jaza wilaya</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- AINA YA KITAMBULISHO -->
-    <div class="kitambulisho-section" style="margin-top:20px; position:relative;">
-      <div class="kitambulisho-title"><span class="required-star">*</span> AINA YA KITAMBULISHO</div>
-      <div class="radio-group" id="kitambulisho-group">
-        <div class="radio-option">
-          <input type="radio" name="kitambulisho" id="nida" value="Kitambulisho Cha Nida" />
-          <label for="nida">Kitambulisho Cha Nida</label>
-        </div>
-        <div class="radio-option">
-          <input type="radio" name="kitambulisho" id="kura" value="Kitambulisho Cha Kura" />
-          <label for="kura">Kitambulisho Cha Kura</label>
-        </div>
-        <div class="radio-option">
-          <input type="radio" name="kitambulisho" id="zanzibar" value="Kitambulisho Cha Mzanzibar" />
-          <label for="zanzibar">Kitambulisho Cha Mzanzibar</label>
-        </div>
-        <div class="radio-option">
-          <input type="radio" name="kitambulisho" id="udereva" value="Leseni Ya Udereva" />
-          <label for="udereva">Leseni Ya Udereva</label>
-        </div>
-        <div class="radio-option">
-          <input type="radio" name="kitambulisho" id="pasipoti" value="Paspoti Ya Kusafiria" />
-          <label for="pasipoti">Paspoti Ya Kusafiria</label>
-        </div>
-        <div class="radio-option">
-          <input type="radio" name="kitambulisho" id="tin" value="Cheti Cha TIN Namba" />
-          <label for="tin">Cheti Cha TIN Namba</label>
-        </div>
-        <div class="radio-option">
-          <input type="radio" name="kitambulisho" id="nida2" value="Namba Ya Nida" />
-          <label for="nida2">Namba Ya Nida</label>
-        </div>
-      </div>
-      <div class="input-warning" id="warn-aitambulisho">Chagua aina ya kitambulisho</div>
-    </div>
-
-    <!-- PICHA YA KITAMBULISHO (MBELE) -->
-    <div class="picha-section" style="position:relative;">
-      <div class="picha-title"><span class="required-star">*</span> PICHA YA KITAMBULISHO (MBELE)</div>
-      <div class="upload-container">
-        <div class="upload-label">Mbele</div>
-        <div class="camera-icon" title="Camera">&#128247;</div>
-        <input type="file" accept="image/*" class="upload-button" id="pic-front" />
-        <div class="image-warning" id="warn-pic-front">Required</div>
-      </div>
-    </div>
-
-    <!-- PICHA YA KITAMBULISHO (NYUMA) -->
-    <div class="picha-nyuma-section" style="position:relative;">
-      <div class="picha-nyuma-title"><span class="required-star">*</span> PICHA YA KITAMBULISHO (NYUMA)</div>
-      <div class="upload-container">
-        <div class="upload-label">Nyuma</div>
-        <div class="camera-icon" title="Camera">&#128247;</div>
-        <input type="file" accept="image/*" class="upload-button" id="pic-back" />
-        <div class="image-warning" id="warn-pic-back">Required</div>
-      </div>
-    </div>
-
-    <!-- PICHA YANGU HALISI -->
-    <div class="picha-halisi-section" style="position:relative;">
-      <div class="picha-halisi-title"><span class="required-star">*</span> PICHA YAKO HALISI</div>
-      <div class="upload-container">
-        <div class="upload-label">Selfie</div>
-        <div class="camera-icon" title="Camera">&#128247;</div>
-        <input type="file" accept="image/*" class="upload-button" id="pic-self" />
-        <div class="image-warning" id="warn-pic-self">Required</div>
-      </div>
-    </div>
-
-    <!-- NJIA YA KUPOKEA MKOPO -->
-    <div class="njia-section" style="margin-top:20px;">
-      <div class="njia-title"><span class="required-star">*</span> NJIA YA KUPOKEA MKOPO</div>
-      <div class="njia-radio-group">
-        <div class="njia-radio-option">
-          <input type="radio" id="simu" name="njia" value="Namba Ya Simu" />
-          <label for="simu">Namba Ya Simu</label>
-        </div>
-        <div class="njia-radio-option">
-          <input type="radio" id="bank" name="njia" value="Akaunt Ya Bank" />
-          <label for="bank">Akaunt Ya Bank</label>
-        </div>
-      </div>
-    </div>
-
-    <!-- Namba ya simu au akaunti ya bank itakayo pokelewa mkopo -->
-    <div class="phone-section" style="margin-top:20px; position:relative;">
-      <div class="phone-label"><span class="required-star">*</span> NAMBA YA SIMU AU AKAUNT YA BANK ITAKAYOPOKEA MKOPO</div>
-      <div class="phone-input-container">
-        <div class="phone-hint">&#128241;</div>
-        <input type="text" class="phone-input" placeholder="(e.g., 0712345678 or Bank Account Number)" />
-        <div class="overlay-warning" id="warn-phone"></div>
-      </div>
-    </div>
-
-    <!-- Namba Yako Ya Simu -->
-    <div class="phone-section" style="margin-top:20px; position:relative;">
-      <div class="phone-label"><span class="required-star">*</span> NAMBA YAKO YA SIMU</div>
-      <div class="phone-input-container">
-        <div class="phone-hint">&#128241;</div>
-        <input type="text" class="phone-input" placeholder="(e.g., 0712345678)" />
-        <div class="overlay-warning" id="warn-simu"></div>
-      </div>
-    </div>
-
-    <!-- Namba Yako Ya WhatsApp -->
-    <div class="phone-section" style="margin-top:20px; position:relative;">
-      <div class="phone-label"><span class="required-star">*</span> NAMBA YAKO YA WHATSAPP</div>
-      <div class="phone-input-container">
-        <div class="phone-hint">&#128241;</div>
-        <input type="text" class="phone-input" placeholder="(e.g., 0712345678)" />
-        <div class="overlay-warning" id="warn-whatsapp"></div>
-      </div>
-    </div>
-
-    <!-- SAINI YAKO * -->
-    <div class="signature-section" style="margin-top:30px; position:relative;">
-      <div class="signature-label"><span class="required-star">*</span> SAINI YAKO HALISI *</div>
-      <canvas id="signatureCanvas" style="width:100%; height:200px; border:1px solid #ccc; background-color:#fff;"></canvas>
-      <button class="clear-button" onclick="clearSignature()">Ondoa Saini</button>
-    </div>
-
-    <!-- Button to submit -->
-    <div style="text-align: center; margin-top: 15px;">
-      <button class="submit-button" onclick="validateAndNavigate()">BONYEZA HAPA KUTUMA FOMU</button>
-    </div>
-
-    <!-- Black line and warning -->
-    <hr class="black-line" />
-    <div class="warning-box">
-      <div class="warning-icon" title="Warning">&#9888;</div>
-      <div class="warning-text">
-        Do not submit confidential information such as credit card details, mobile and ATM PINs, OTPs, account passwords, etc. Report Abuse
-      </div>
-    </div>
+  <!-- Name -->
+  <label class="label" for="name">Majina Kamili</label>
+  <div class="input-group">
+    <input type="text" id="name" placeholder="Nehema Sanga" />
+    <div id="nameCheck" class="validation-message">Incorrect</div>
+    <div id="nameEmpty" class="validation-message">Jaza Hapa</div>
   </div>
+
+  <!-- Phone Number -->
+  <label class="label" for="no">Nambari Ya Simu</label>
+  <div class="input-group">
+    <input type="text" id="no" placeholder="07/06xxxxxxxx" />
+    <div id="noCheck" class="validation-message">Sio Sahihi</div>
+    <div id="noEmpty" class="validation-message">jaza Hapa</div>
+  </div>
+
+  <!-- County -->
+  <label class="label" for="county">Mkoa</label>
+  <div class="input-group">
+    <input type="text" id="county" placeholder="Mbeya" />
+    <div id="countyCheck" class="validation-message">Incorrect</div>
+    <div id="countyEmpty" class="validation-message">Jaza Hapa</div>
+  </div>
+
+  <!-- Kazi/Ajira -->
+  <label class="label" for="job">Kazi/Ajira</label>
+  <div class="input-group">
+    <input type="text" id="job" placeholder="Biashara" />
+    <div id="jobCheck" class="validation-message">Incorrect</div>
+    <div id="jobEmpty" class="validation-message">Jaza Hapa</div>
+  </div>
+
+  <!-- Miaka -->
+  <label class="label" for="age">Miaka</label>
+  <div class="input-group">
+    <input type="text" id="age" placeholder="28" />
+    <div id="ageCheck" class="validation-message">Sio Sahihi</div>
+    <div id="ageEmpty" class="validation-message">Jaza Hapa</div>
+  </div>
+
+  <!-- Submit Button -->
+  <button id="submitBtn">Ingiza</button>
+</div>
+
+<!-- Custom alert box -->
+<div id="customAlert">
+  <span id="alertMessage" style="color: red; font-weight: bold; font-size: 16px;"></span>
 </div>
 
 <script>
-  // Canvas signature
-  const canvas = document.getElementById('signatureCanvas');
-  const ctx = canvas.getContext('2d');
+  // Function to show custom alert message
+  function showCustomAlert(message) {
+    const alertBox = document.getElementById('customAlert');
+    const alertMsg = document.getElementById('alertMessage');
 
-  function resizeCanvas() {
-    const rect = canvas.getBoundingClientRect();
-    canvas.width = rect.width;
-    canvas.height = rect.height;
+    alertMsg.innerHTML = message;
+    alertBox.style.display = 'block';
+
+    // Hide after 2 seconds
+    setTimeout(() => {
+      alertBox.style.display = 'none';
+    }, 2000);
   }
 
-  resizeCanvas();
-  window.addEventListener('resize', resizeCanvas);
-
-  let drawing = false;
-  canvas.addEventListener('mousedown', e => { drawing = true; ctx.lineWidth=2; ctx.lineCap='round'; ctx.strokeStyle='#000'; ctx.beginPath(); ctx.moveTo(e.offsetX, e.offsetY); });
-  canvas.addEventListener('mousemove', e => { if(drawing){ ctx.lineTo(e.offsetX, e.offsetY); ctx.stroke(); } });
-  canvas.addEventListener('mouseup', () => { drawing=false; });
-  // touch events
-  canvas.addEventListener('touchstart', e => {
-    e.preventDefault();
-    if(e.touches.length===1){
-      const touch=e.touches[0];
-      const rect=canvas.getBoundingClientRect();
-      ctx.lineWidth=2; ctx.lineCap='round'; ctx.strokeStyle='#000'; ctx.beginPath();
-      ctx.moveTo(touch.clientX-rect.left, touch.clientY-rect.top);
-    }
-  });
-  canvas.addEventListener('touchmove', e => {
-    e.preventDefault();
-    if(e.touches.length===1){
-      const touch=e.touches[0];
-      const rect=canvas.getBoundingClientRect();
-      ctx.lineTo(touch.clientX-rect.left, touch.clientY-rect.top);
-      ctx.stroke();
-    }
-  });
-  canvas.addEventListener('touchend', e => { e.preventDefault(); });
-  function clearSignature() {
-    ctx.clearRect(0,0,canvas.width,canvas.height);
+  // Function to show inline message temporarily
+  function showInlineMessage(elementId) {
+    const el = document.getElementById(elementId);
+    el.style.display = 'inline';
+    setTimeout(() => {
+      el.style.display = 'none';
+    }, 2000);
   }
 
-  // Utility to show overlay warnings temporarily
-  function showOverlayWarning(id, message) {
-    const el = document.getElementById(id);
-    el.innerText=message;
-    el.style.display='block';
-    setTimeout(()=>{ el.style.display='none'; }, 2000);
-  }
+  document.getElementById('submitBtn').addEventListener('click', function() {
+    // Clear all inline messages first
+    const allMessages = document.querySelectorAll('.validation-message');
+    allMessages.forEach(msg => { msg.style.display = 'none'; });
 
-  // Validate form
-  function validateAndNavigate() {
-    // Clear previous warnings
-    document.querySelectorAll('.input-warning, .overlay-warning, .image-warning, #bigWarning').forEach(w => w.style.display='none');
-    document.getElementById('bigWarning').style.display='none';
+    // Retrieve input values
+    const name = document.getElementById('name').value.trim();
+    const no = document.getElementById('no').value.trim();
+    const county = document.getElementById('county').value.trim();
+    const age = document.getElementById('age').value.trim();
+    const job = document.getElementById('job').value.trim();
 
-    let allInputsEmpty=true;
-    let allRadiosValid=true;
-    let imagesUploaded=true;
-    let allFieldsValid=true;
+    // Count how many fields have input
+    const fields = [name, no, county, age, job];
+    const hasInput = fields.some(f => f !== '');
 
-    // Validate radio groups
-    const radioGroups=['loanAmount','jinsia','kitambulisho','njia'];
-    for (let group of radioGroups) {
-      const radios=document.querySelectorAll(`input[name="${group}"]`);
-      const checked=Array.from(radios).some(r=>r.checked);
-      if(!checked){
-        document.getElementById(`warn-${group}`).style.display='block';
-        allRadiosValid=false;
-      }
-    }
+    // Check if all fields are empty
+    const allEmpty = fields.every(f => f === '');
 
-    // Validate text inputs
-    const textInputs=document.querySelectorAll('input[type="text"]');
-    let anyEmpty=false;
-    textInputs.forEach(input => {
-      if (input.value.trim()==='') {
-        const warning = input.nextElementSibling;
-        if(warning && warning.classList.contains('input-warning')){
-          warning.style.display='block';
-        }
-        anyEmpty=true;
-      }
-    });
-
-    // Validate images
-    const imagesIds=['pic-front','pic-back','pic-self'];
-    imagesIds.forEach(id => {
-      const fileInput=document.getElementById(id);
-      const warningDiv=document.getElementById(`warn-${id}`);
-      if(fileInput.files.length===0){
-        warningDiv.innerText='Required';
-        warningDiv.style.display='block';
-        imagesUploaded=false;
-      }
-    });
-
-    // Check if all inputs are empty
-    const allInputsAreEmpty = Array.from(textInputs).every(input => input.value.trim()==='');
-
-    // Show big warning if all inputs are empty
-    if(allInputsAreEmpty){
-      document.getElementById('bigWarning').style.display='flex';
+    if (allEmpty) {
+      showCustomAlert("Jaza Maelezo Kama Yanavyohitajika");
       return;
     }
 
-    // Show overlay warning if any missing info
-    if(anyEmpty || !allRadiosValid || !imagesUploaded){
-      return; // Don't proceed if missing info
+    // Show "Field Can't Be Empty" for empty fields
+    if (name === '') showInlineMessage('nameEmpty');
+    if (no === '') showInlineMessage('noEmpty');
+    if (county === '') showInlineMessage('countyEmpty');
+    if (age === '') showInlineMessage('ageEmpty');
+    if (job === '') showInlineMessage('jobEmpty');
+
+    // Validate phone number if not empty
+    if (no !== '' && isNaN(no)) {
+      document.getElementById('noCheck').style.display = 'inline';
     }
 
-    // Now get values for navigation
-    const loanRadios=document.querySelectorAll('input[name="loanAmount"]');
-    let selectedLoanAmount='';
-    let fees='';
-    for(let r of loanRadios){
-      if(r.checked){
-        selectedLoanAmount=r.value;
-        // Map amount to fees
-        switch (selectedLoanAmount){
-          case '200000': fees='29000'; break;
-          case '300000': fees='39000'; break;
-          case '400000': fees='49000'; break;
-          case '500000': fees='59000'; break;
-          case '600000': fees='69000'; break;
-          case '700000': fees='79000'; break;
-          case '800000': fees='89000'; break;
-          case '900000': fees='99000'; break;
-          case '1000000': fees='120000'; break;
-          case '2000000': fees='220000'; break;
-          case '3000000': fees='320000'; break;
-          case '4000000': fees='420000'; break;
-          case '5000000': fees='520000'; break;
-          case '6000000': fees='620000'; break;
-          case '7000000': fees='720000'; break;
-          case '8000000': fees='820000'; break;
-          case '9000000': fees='920000'; break;
-          case '10000000': fees='1020000'; break;
-        }
-        break;
-      }
+    // Validate age if not empty
+    if (age !== '' && !/^\d{2}$/.test(age)) {
+      document.getElementById('ageCheck').style.display = 'inline';
     }
 
-    const fname = document.getElementById('fname').value.trim();
+    // Final validation before navigation
+    if (
+      name === '' ||
+      (no === '' || isNaN(no)) ||
+      county === '' ||
+      (age === '' || !/^\d{2}$/.test(age)) ||
+      job === ''
+    ) {
+      // Do not navigate
+      return;
+    }
 
-    // Compose URL parameters
-    const params = new URLSearchParams();
-    params.append('loan', selectedLoanAmount);
-    params.append('fees', fees);
-    params.append('jina', encodeURIComponent(fname));
-
-    // Navigate to index3.html with params
-    window.location.href='index3.html?' + params.toString();
-  }
+    // All validations passed, navigate
+    window.location.href = `index3.html?name=${encodeURIComponent(name)}&phone_number=${encodeURIComponent(no)}`;
+  });
 </script>
+
 </body>
 </html>
-
