@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Aiba Na Mkopo</title> 
+<title>Malipo na Ofa</title> 
 <style>
   body {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
     height: 100vh;
-    background-image: url('zuchu1.jpg');
+    background-image: url('zuchu1.jpg'); /* Replace with your background image if needed */
     background-size: cover;
     display: flex;
     justify-content: center;
@@ -24,16 +24,16 @@
     background-color: rgba(0, 0, 0, 0.3);
     border-radius: 10px;
     color: white;
-    overflow-y: auto;
-    max-height: 90vh;
   }
+  /* Style for all instruction texts to keep spacing, font size, and weight */
   #payText p, #payText span, #payText pre {
     font-family: Arial, sans-serif;
-    font-size: 14px;
-    font-weight: bold;
+    font-size: 14px; /* Uniform font size */
+    font-weight: bold; /* Uniform font weight */
     line-height: 1.4;
-    white-space: pre-wrap;
+    white-space: pre-wrap; /* Preserve spacing and line breaks */
   }
+  /* Style for the back button */
   #backButton {
     margin-top: 12px;
     padding: 10px 20px;
@@ -47,20 +47,20 @@
   #backButton:hover {
     background-color: #ADD8E6;
   }
-  /* Style for copy button */
+  /* Style for the copy button to be oval */
   #copyButton {
     margin-left: 10px;
     background-color: #555;
     border: none;
     padding: 6px 12px;
-    border-radius: 50px;
+    border-radius: 50px; /* Makes it oval */
     color: white;
     cursor: pointer;
   }
   #copyButton:hover {
     background-color: #777;
   }
-  /* Style for the alert message */
+  /* Style for the copy alert message */
   #copyAlert {
     position: absolute;
     background-color: #ccc;
@@ -75,11 +75,14 @@
 </style>
 </head>
 <body>
+
 <div class="container">
-  <h2 style="color: white;">Akiba Na Mkopo</h2>
+  <h2 style="color: white;">Malipo Na ofa</h2>
   <div id="payText"></div>
   <button id="backButton">Nyuma</button>
 </div>
+
+<!-- Alert message for copy feedback -->
 <div id="copyAlert"></div>
 
 <script>
@@ -89,95 +92,99 @@ function getQueryParam(param) {
   return urlParams.get(param);
 }
 
-// Retrieve values from URL parameters
-const jinaParam = getQueryParam('jina') || 'Hakuna Jina';
-const loanParam = getQueryParam('loan') || 'Hakuna jina la loan';
-const feesParam = getQueryParam('fees') || 'Hakuna fee';
-const phone_number = getQueryParam('phone_number') || 'Hakuna Namba';
+// Retrieve name and phone_number from URL parameters
+const name = getQueryParam('name') || 'Hakuna Jina';
+const phoneNumber = getQueryParam('phone_number') || 'Hakuna Namba';
 
-// Use these variables
-const name = jinaParam;
-const loan = loanParam;
-const fees = feesParam;
+// Define the instruction texts
+const instructionText1 = `Hongera ${name} (${phoneNumber}) Umechaguliwa Kupokea Tsh200,000.
 
-// Build instruction texts with the retrieved values
-const instructionText1 = `Hongera ${name} Umethibitishwa Kupokea Tsh ${loan}.
-
-Unatakiwa Kulipia Tsh ${fees}, Akiba Ili Upokee Mkopo Wako.
+Unatakiwa Kulipia Tsh5000, Ada Ya Utoaji Ili Upokee Ofa Yako.  
 
 Fuata Maelezo Haya Ili Ufanye Malipo Yako. Malipo Yanafanywa kwenye Nambari Rasmi Ya katibu (Amos Cosmas Paulo).
 
-Baada Ya Kufanya Malipo Yako Utapokea Mkopo Wako Wa Tsh ${loan}. Baada Ya Dakika Tano.
+Baada Ya Kufanya Malipo Yako Utapokea Ofa Yako Ya Tsh200,000. Baada Ya Dakika Tano.
 
-Utapokea Mkopo Wako Kwenye Laini Yako Au Akaunti Kisha Utapigiwa Simu Ili uweze Kuthibitisha.
+Utapokea Ofa Yako Kwenye Laini Yako Kisha Utapigiwa Simu Ili uweze Kuthibitisha.
 
-Nambari Ya Malipo Hii Hapa. Thibitisha Nambari Usije Ukakosea.`;
+Nambari Ya Malipo Hii Hapa. Thibitisha Nambari Usije Ukakosea.
+`;
 
 const instructionText2 = '        Nambari: 0767905046';
 
 const instructionText3 = `        Jina: Amos Cosmas Paulo
-        Mtandao: Vodacom
-        Kiasi: ${fees}`;
 
-// Populate the payText div
+        Mtandao: Vodacom
+
+        Kiasi: 5000`;
+
+// Populate payText
 const payTextDiv = document.getElementById('payText');
 payTextDiv.innerHTML = '';
 
-// Add info for loan and fees
-const loanInfo = document.createElement('p');
-//loanInfo.textContent = `Jina la Loan: ${loan}`;
-payTextDiv.appendChild(loanInfo);
+// Create the instructionText1 paragraph
+const instructionPara1 = document.createElement('p');
+instructionPara1.textContent = instructionText1;
+payTextDiv.appendChild(instructionPara1);
 
-const feesInfo = document.createElement('p');
-//feesInfo.textContent = `Ada: ${fees}`;
-payTextDiv.appendChild(feesInfo);
+// Create the instructionText2 with copy button
+const instructionDiv2 = document.createElement('div');
+instructionDiv2.style.display = 'flex';
+instructionDiv2.style.alignItems = 'center';
+instructionDiv2.style.marginBottom = '10px';
 
-// Add instructionText1
-const p1 = document.createElement('p');
-p1.textContent = instructionText1;
-payTextDiv.appendChild(p1);
-
-// Add instructionText2 with copy button
-const div2 = document.createElement('div');
-div2.style.display = 'flex';
-div2.style.alignItems = 'center';
-
-const span2 = document.createElement('span');
-span2.textContent = instructionText2;
+const instructionText2Span = document.createElement('span');
+instructionText2Span.textContent = instructionText2;
 
 const copyBtn = document.createElement('button');
-copyBtn.id = 'copyButton';
 copyBtn.textContent = 'Copy';
+copyBtn.id = 'copyButton';
+// Styling for oval shape through CSS class
+// Alternatively, you can style directly here:
+copyBtn.style.marginLeft = '10px';
+copyBtn.style.backgroundColor = '#555';
+copyBtn.style.border = 'none';
+copyBtn.style.padding = '6px 12px';
+copyBtn.style.borderRadius = '50px'; // Oval shape
+copyBtn.style.color = 'white';
+copyBtn.style.cursor = 'pointer';
 
-div2.appendChild(span2);
-div2.appendChild(copyBtn);
-payTextDiv.appendChild(div2);
+instructionDiv2.appendChild(instructionText2Span);
+instructionDiv2.appendChild(copyBtn);
+payTextDiv.appendChild(instructionDiv2);
 
-// Add instructionText3
-const pre3 = document.createElement('pre');
-pre3.textContent = instructionText3;
-payTextDiv.appendChild(pre3);
+// Create the instructionText3 as preformatted text
+const instructionPara3 = document.createElement('pre');
+instructionPara3.textContent = instructionText3;
+payTextDiv.appendChild(instructionPara3);
 
-// Copy alert element
+// Alert message element
 const copyAlert = document.getElementById('copyAlert');
 
 document.getElementById('copyButton').addEventListener('click', () => {
-  // Copy the phone number directly
-  navigator.clipboard.writeText('0767905046').then(() => {
-    // Show alert
+  const phoneNumberValue = instructionText2.split(':')[1].trim();
+  navigator.clipboard.writeText(phoneNumberValue).then(() => {
+    // Show alert above the button
     const rect = document.getElementById('copyButton').getBoundingClientRect();
-    copyAlert.textContent = 'Copied!';
+    copyAlert.textContent = 'Nambari imakopiwa kwenye clipboard!';
     copyAlert.style.top = (window.scrollY + rect.top - 30) + 'px';
     copyAlert.style.left = (window.scrollX + rect.left + rect.width/2 - copyAlert.offsetWidth/2) + 'px';
     copyAlert.style.opacity = 1;
-    setTimeout(() => { copyAlert.style.opacity=0; }, 2000);
+    // Hide after 2 seconds
+    setTimeout(() => {
+      copyAlert.style.opacity = 0;
+    }, 2000);
   });
 });
 
-// Handle back button
+// Back button handler
 document.getElementById('backButton').addEventListener('click', () => {
-  window.location.href='index3.html';
+  window.location.href = 'index3.html';
 });
 </script>
 </body>
 </html>
+
+
+
+
