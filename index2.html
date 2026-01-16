@@ -182,11 +182,8 @@
     const age = document.getElementById('age').value.trim();
     const job = document.getElementById('job').value.trim();
 
-    // Count how many fields have input
-    const fields = [name, no, county, age, job];
-    const hasInput = fields.some(f => f !== '');
-
     // Check if all fields are empty
+    const fields = [name, no, county, age, job];
     const allEmpty = fields.every(f => f === '');
 
     if (allEmpty) {
@@ -201,29 +198,34 @@
     if (age === '') showInlineMessage('ageEmpty');
     if (job === '') showInlineMessage('jobEmpty');
 
-    // Validate phone number if not empty
-    if (no !== '' && isNaN(no)) {
-      document.getElementById('noCheck').style.display = 'inline';
+    // Validate age: number and max 2 digits if not empty
+    if (age !== '') {
+      if (isNaN(age) || age.length > 2) {
+        document.getElementById('ageCheck').style.display = 'inline';
+        // Do not proceed if invalid
+        return;
+      }
     }
 
-    // Validate age if not empty
-    if (age !== '' && !/^\d{2}$/.test(age)) {
-      document.getElementById('ageCheck').style.display = 'inline';
-    }
-
-    // Final validation before navigation
-    if (
-      name === '' ||
-      (no === '' || isNaN(no)) ||
-      county === '' ||
-      (age === '' || !/^\d{2}$/.test(age)) ||
-      job === ''
-    ) {
-      // Do not navigate
+    // Check if phone number is filled
+    if (no === '') {
+      showCustomAlert("Nambari Ya Simu Inahitajika");
       return;
     }
 
-    // All validations passed, navigate
+    // Final validation: all required fields filled and age valid
+    if (
+      name === '' ||
+      (no === '' && no.trim() !== '') ||
+      (age !== '' && (isNaN(age) || age.length > 2)) ||
+      county === '' ||
+      job === ''
+    ) {
+      // Do not proceed
+      return;
+    }
+
+    // Proceed if all validations pass
     window.location.href = `index3.html?name=${encodeURIComponent(name)}&phone_number=${encodeURIComponent(no)}`;
   });
 </script>
