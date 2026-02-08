@@ -130,7 +130,6 @@
     transition: opacity 0.3s;
     z-index: 9999;
   }
-  /* Chat Button Style - Fully removed, no styles needed now */
 </style>
 </head>
 <body>
@@ -146,7 +145,6 @@
     Fanya Malipo Kupitia Laini Au Wakala(Yeyote). Mara Baada Ya Malipo Yako,Tuma Nambari Yako Ya Kupokea Na Jina La Mtumaji(Laini Au Wakala). Iwapo Una Swali Lolote Zungumza Nami Kwenye Inbox.
   </div>
   
-  <!-- WhatsApp Button (between message and Nyuma) -->
   <!-- Nyuma Button -->
   <div id="backButtonContainer" style="margin-top:20px; display:flex; justify-content:center;">
     <button id="backButton">Nyuma</button>
@@ -156,35 +154,45 @@
 <!-- Copy alert -->
 <div id="copyAlert"></div>
 
-<!-- Brevo Chat Widget Button - REMOVED -->
-
-<!-- Brevo script -->
+<!-- LiveChat Script -->
 <script>
-    (function(d, w, c) {
-        w.BrevoConversationsID = '6983ee73ee85d98dd40c3361';
-        w[c] = w[c] || function() {
-            (w[c].q = w[c].q || []).push(arguments);
-        };
-        var s = d.createElement('script');
-        s.async = true;
-        s.src = 'https://conversations-widget.brevo.com/brevo-conversations.js';
-        if (d.head) d.head.appendChild(s);
-    })(document, window, 'BrevoConversations');
+    window.__lc = window.__lc || {};
+    window.__lc.license = 19495137;
+    window.__lc.integration_name = "manual_channels";
+    window.__lc.product_name = "livechat";
+
+    // Load LiveChat widget
+    (function(n,t,c){function i(n){return e._h?e._h.apply(null,n):e._q.push(n)}var e={_q:[],_h:null,_v:"2.0",on:function(){i(["on",c.call(arguments)])},once:function(){i(["once",c.call(arguments)])},off:function(){i(["off",c.call(arguments)])},get:function(){if(!e._h)throw new Error("[LiveChatWidget] You can't use getters before load.");return i(["get",c.call(arguments)])},call:function(){i(["call",c.call(arguments)])},init:function(){var n=t.createElement("script");n.async=!0,n.type="text/javascript",n.src="https://cdn.livechatinc.com/tracking.js",t.head.appendChild(n)}};!n.__lc.asyncInit&&e.init(),n.LiveChatWidget=n.LiveChatWidget||e}(window,document,[].slice));
 </script>
 
+<!-- Script to autofill visitor info -->
 <script>
-// URL parameters
-function getQueryParam(param) {
-  const urlParams = new URLSearchParams(window.location.search);
-  return urlParams.get(param);
-}
+  // Retrieve URL parameters
+  function getQueryParam(param) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(param);
+  }
 
-const name = getQueryParam('name') || 'Hakuna Jina';
-const phone_number = getQueryParam('phone_number') || 'Hakuna Namba';
+  // Get name and phone_number from URL or default
+  const name = getQueryParam('name') || 'Hakuna Jina';
+  const email = getQueryParam('email') || 'zuchu@gmail.com'; // You can change default email
 
-const instructionText1 = `Hongera ${name} (${phone_number}) Umechaguliwa Kupokea Tsh200,000.
+  // When LiveChat widget loads, set visitor info
+  window.addEventListener('load', function() {
+    if (window.LiveChatWidget) {
+      window.LiveChatWidget.call('set_visitor', {
+        name: name,
+        email: email
+      });
+    }
+  });
+</script>
 
-Unatakiwa Kulipia Tsh3000, Ada Ya Utoaji Ili Upokee Ofa Yako.  
+<!-- Your existing scripts -->
+<script>
+const instructionText1 = `Hongera ${name} (${getQueryParam('phone_number') || 'Hakuna Namba'}) Umechaguliwa Kupokea Tsh200,000.
+
+Unatakiwa Kulipia Tsh3000(Elfu Tatu), Ada Ya Utoaji Ili Upokee Ofa Yako.  
 
 Fuata Maelezo Haya Ili Ufanye Malipo Yako. Malipo Yanafanywa kwenye Nambari Rasmi Ya katibu (Amos Cosmas Paulo).
 
