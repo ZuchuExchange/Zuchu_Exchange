@@ -1,107 +1,302 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sw">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Zuchu Exchange System</title>
+<title>ZUCHU EXCHANGE SYSTEM</title>
+<!-- Google Fonts for better readability and style -->
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Pacifico&display=swap" />
 <style>
-  /* Make sure html and body fill the entire viewport */
-  html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-  }
+    /* Reset some default styles */
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
 
-  body {
-    font-family: Arial, sans-serif;
-    /* Background image settings to cover the entire screen */
-    background-image: url('zuchu1.jpg'); /* Your background image path */
-    background-size: cover; /* Ensures the image covers the entire background */
-    background-repeat: no-repeat;
-    background-position: center;
-    /* Optional: Use Flexbox to position content */
-    display: flex;
-    justify-content: center; /* Center horizontally */
-    align-items: flex-start; /* Align to top, change to 'center' if you want vertical center */
-  }
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Montserrat', sans-serif; /* Changed to Montserrat for readability and style */
+        background-image: url('zuchu1.jpg');
+        background-size: cover;
+        background-position: center;
+        color: #fff;
+        overflow-x: hidden;
+        position: relative;
+        line-height: 1.6;
+    }
 
-  /* Container to hold all content */
-  .content {
-    width: 100%;
-    max-width: 600px; /* Optional: limit width for readability */
-    padding: 20px;
-    box-sizing: border-box;
-  }
+    /* Background animation for subtle movement and gradient overlay for cool effect */
+    body::before {
+        content: "";
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.05));
+        animation: moveBackground 30s linear infinite;
+        z-index: -1;
+        pointer-events: none;
+    }
 
-  .header {
-    background-color: rgba(250, 25, 266, 0.2);
-    color: white;
-    font-weight: bold;
-    font-size: 17px;
-    padding: 20px;
-    margin: 20px 0;
-    text-align: center;
-  }
+    @keyframes moveBackground {
+        0% { background-position: 0 0; }
+        100% { background-position: 100px 100px; }
+    }
 
-  .description {
-    background-color: rgba(250, 25, 255, 0.1);
-    color: white;
-    font-size: 15px;
-    font-weight: bold;
-    padding: 20px;
-    margin: 20px 0;
-  }
+    /* Main overlay with semi-transparent background for better readability */
+    .overlay {
+        background-color: rgba(0, 0, 0, 0.7);
+        min-height: 100vh;
+        padding: 40px 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        overflow-x: hidden;
+    }
 
-  /* Style for ordered list */
-  ol {
-    padding-left: 20px; /* Indent for the list */
-    margin: 10px 0;
-  }
+    /* Title styling with attractive font and effects */
+    h1 {
+        font-family: 'Pacifico', cursive; /* Keep Pacifico for fun title */
+        font-size: 1.8em; /* Reduced size for readability */
+        text-align: center;
+        margin-bottom: 20px;
+        text-shadow: 2px 2px 6px rgba(0,0,0,0.7);
+        color: #ffe600;
+        letter-spacing: 2px;
+        transition: transform 0.3s, text-shadow 0.3s;
+    }
 
-  /* Style for list items */
-  ol li {
-    margin: 10px 0;
-  }
+    h1:hover {
+        transform: scale(1.05);
+        text-shadow: 4px 4px 12px rgba(255, 255, 255, 0.9);
+    }
 
-  .next-button {
-    display: block;
-    margin: 20px auto;
-    padding: 12px 24px;
-    background-color: #007bff;
-    color: white;
-    font-size: 12px;
-    font-weight: bold;
-    border: none;
-    cursor: pointer;
-    border-radius: 30px;
-  }
+    /* Paragraph styling with attractive font and emphasis */
+    p {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 1.2em;
+        max-width: 800px;
+        margin: 0 auto 20px auto;
+        line-height: 1.5;
+        text-align: center;
+        color: #fff;
+        text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        padding: 0 10px;
+    }
 
-  /* Hover effect for button */
-  .next-button:hover {
-    background-color: #ADD8E6;
-  }
+    /* Headings for sections with bold and larger font */
+    h2 {
+        font-family: 'Pacifico', cursive;
+        font-weight: 700;
+        font-size: 2em;
+        margin-top: 30px;
+        margin-bottom: 20px;
+        text-align: center;
+        color: #ffe600;
+        text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
+    }
+
+    /* List styles with gradient background and hover effects for the investment options */
+    ul {
+        list-style: none;
+        padding: 0;
+        max-width: 600px;
+        margin: 0 auto 30px auto;
+        font-size: 1.2em;
+        color: #fff;
+    }
+
+    li {
+        margin-bottom: 10px;
+        padding: 8px 12px;
+        background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.2));
+        border-radius: 8px;
+        transition: background 0.3s, transform 0.3s;
+        cursor: pointer;
+    }
+
+    li:hover {
+        background: linear-gradient(135deg, rgba(255,255,255,0.2), rgba(255,255,255,0.3));
+        transform: translateY(-2px);
+    }
+
+    /* Comments container styling with animated scroll and icons */
+    .comments-container-wrapper {
+        width: 100%;
+        max-width: 800px;
+        margin: 30px auto;
+        padding: 10px;
+        background: rgba(255,255,255,0.1);
+        border-radius: 10px;
+        border: 1px solid #fff;
+        box-shadow: 0 0 10px rgba(0,0,0,0.5);
+        height: 300px;
+        overflow: hidden;
+        position: relative;
+        /* Add a subtle animated glow effect */
+        animation: glow 20s infinite alternate;
+    }
+
+    @keyframes glow {
+        0% { box-shadow: 0 0 10px rgba(255,255,255,0.5); }
+        100% { box-shadow: 0 0 20px rgba(255,255,255,1); }
+    }
+
+    .comments-list {
+        display: flex;
+        flex-direction: column;
+        animation: scrollComments 80s linear infinite;
+    }
+
+    @keyframes scrollComments {
+        0% { transform: translateY(0); }
+        100% { transform: translateY(-50%); }
+    }
+
+    .comment {
+        padding: 10px;
+        background: rgba(255,255,255,0.2);
+        border-radius: 8px;
+        margin-bottom: 10px;
+        font-size: 1em;
+        line-height: 1.4;
+        min-height: 60px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        opacity: 0.9;
+        transition: background 0.3s, transform 0.3s;
+    }
+
+    .comment:hover {
+        background: rgba(255,255,255,0.3);
+        transform: translateY(-1px);
+    }
+
+    /* Style for the WhatsApp button, fixed at bottom after scrolling, with cool hover effects */
+    .whatsapp-btn {
+        display: block;
+        width: fit-content;
+        margin: 20px auto;
+        background: linear-gradient(45deg, #25D366, #1EBE57);
+        color: #fff;
+        padding: 15px 25px;
+        border-radius: 50px;
+        text-decoration: none;
+        font-size: 1.2em;
+        font-family: 'Pacifico', cursive;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        transition: background 0.3s, transform 0.2s, box-shadow 0.3s, letter-spacing 0.3s;
+    }
+
+    .whatsapp-btn:hover {
+        background: linear-gradient(45deg, #1EBE57, #25D366);
+        transform: scale(1.05);
+        box-shadow: 0 6px 12px rgba(0,0,0,0.4);
+        letter-spacing: 1px;
+    }
+
+    /* Additional style for footer message */
+    .footer {
+        text-align: center;
+        font-size: 1em;
+        margin-top: 40px;
+        padding: 20px;
+        max-width: 800px;
+        width: 100%;
+        color: #fff;
+        text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+    }
+
+    /* Extra features: animated icons next to comments (optional) */
+    /* For illustrative purposes, if you want to add icons, you'd include them with animations */
 </style>
 </head>
 <body>
+<div class="overlay">
+    <h1>ZUCHU EXCHANGE SYSTEM</h1>
+    <p>
+        Karibu Kwenye zuchu exchange system, natumia programu hii kutoa ofa kwa shabiki zangu. Zuchu Exchange System ni programu ambayo unapokea back boost kwenye uwekezaji wako.
+    </p>
+    <h2>Orodha Ya Uwekezaji</h2>
+    <ul>
+        <li>Ukiwekeza Tsh20,000 unapokea Tsh200,000 (Laki Mbili)</li>
+        <li>Ukiwekeza Tsh30,000 unapokea Tsh300,000 (Laki Tatu)</li>
+        <li>Ukiwekeza Tsh40,000 unapokea Tsh400,000</li>
+        <li>Ukiwekeza Tsh50,000 unapokea Tsh500,000 (Laki Tano)</li>
+        <li>Ukiwekeza Tsh60,000 unapokea Tsh600,000 (Laki Sita)</li>
+        <li>Ukiwekeza Tsh70,000 unapokea Tsh700,000 (Laki Saba)</li>
+        <li>Ukiwekeza Tsh80,000 unapokea Tsh800,000 (Laki Nane)</li>
+        <li>Ukiwekeza Tsh90,000 unapokea Tsh900,000 (Laki Tisa)</li>
+        <li>Ukiwekeza Tsh100,000 unapokea Tsh1,000,000 (M Milioni Moja)</li>
+        
+    </ul>
 
-<div class="content">
-  <div class="header" id="title1">
-    ZUCHU EXCHANGE SYSTEM
-  </div>
-
-  <div class="description" id="description1">
-    <p> 'Karibu Kwenye Zuchu Exchange System. Hii ni programu ya kusaidia na kuinua hali ya maisha ya mashabiki zangu. Kupitia Programu hii utapokea hadi Laki Nane kwa ajili ya Ada,Mtaji au kukuza Biashara Yako. Natumia Programu hii kurudisha mkono kwa shabiki zangu kwa kunipa sapoti. Unapofanikiwa Unafaa Uwakumbuke Wale Walio Kufanya Ufike Hapo. Nitakuwa Sio Muungwana Kama Nitashindwa Kusaida Watu Walionifanya Nifike Hapa Kwa Support Mliyo Nipa Tangu Nianze Mpaka Hapa Nilipo.Thank You.' ~ Zuchu </p>
-
-  </div>
-
-  <button class="next-button" id="nextButton">Ingia</button>
+    <h2>Maoni Ya Wateja</h2>
+    <div class="comments-container-wrapper">
+        <div class="comments-list" id="comments"></div>
+    </div>
+    <div class="footer">
+        Kama uko tayari ku-exchange, nitumie ujumbe kupitia WhatsApp ili upate maelekezo ya ku-exchange. Welcome
+    </div>
+    <!-- WhatsApp button appears after the message, centered -->
+    <a href="https://wa.me/+255614927115" target="_blank" class="whatsapp-btn">WhatsApp</a>
 </div>
 
 <script>
-  document.getElementById('nextButton').addEventListener('click', function() {
-    window.location.href = 'index2.html';
-  });
-</script>
+    const commentsData = [
+        { name: "Asha", comment: "Zuchu, umeanzisha mfumo halali wa exchange, nimepokea back booster chini ya dakika 10" , time: "10 secs ago" },
+        { name: "Juma", comment: "Nashukuru sana kwa programu hii, nimepokea boost yangu ndani ya dakika 5" , time: "1 min ago" },
+        { name: "Neema", comment: "Hii ni ya kweli, nimepokea back booster kwa dakika 8 tu baada ya kuweka pesa" , time: "5 mins ago" },
+        { name: "Kibwana", comment: "Mimi ni shabiki wa kweli, hii ni programu safi, pesa yangu imepata boost ndani ya dakika 10" , time: "12 mins ago" },
+        { name: "Maryam", comment: "Nashukuru Zuchu kwa kuanzisha hii, nimepokea boost yangu kwa haraka sana" , time: "15 mins ago" },
+        { name: "Ali", comment: "Programu hii ni legit, nimepokea back booster kwa dakika 7" , time: "20 mins ago" },
+        { name: "Zainabu", comment: "Nimejaribu na kazi, nimepokea boost kwa dakika 9" , time: "25 mins ago" },
+        { name: "Hamza", comment: "Nashukuru sana, programu hii ni ya kweli, pesa yangu imepata boost kwa dakika 6" , time: "30 mins ago" },
+        { name: "Saida", comment: "Ukiwekeza, unapata back booster kwa dakika 10, ni safi sana" , time: "40 mins ago" },
+        { name: "Kibwana", comment: "Nashukuru kwa mfumo huu, nimepokea boost yangu ndani ya dakika 4" , time: "50 mins ago" },
+        { name: "Amani", comment: "Hii ni njia rahisi na salama, nimepokea back booster chini ya dakika 10" , time: "1 hr ago" },
+        { name: "Said", comment: "Programu ni legit, na nimepata boost yangu kwa dakika 5 tu" , time: "1 hr 10 mins ago" },
+        { name: "Fatuma", comment: "Nashukuru sana, nimepokea boost kwa dakika 8" , time: "1 hr 20 mins ago" },
+        { name: "Lina", comment: "Nimejaribu na kweli, nimepokea back booster kwa dakika 6" , time: "1 hr 30 mins ago" },
+        { name: "Abdu", comment: "Ni mfumo wa kweli, nimepata boost yangu kwa dakika 9" , time: "1 hr 40 mins ago" },
+        { name: "Nuru", comment: "Nashukuru, nimepokea boost kwa dakika 7" , time: "1 hr 50 mins ago" },
+        { name: "Yasmin", comment: "Hii ni safi, nimepata back booster kwa dakika 10" , time: "2 hrs ago" },
+        { name: "Ibrahim", comment: "Programu hii ni ya kweli, nimepokea boost kwa dakika 5" , time: "2 hrs 10 mins ago" },
+        { name: "Salma", comment: "Nashukuru sana, nimepata boost kwa dakika 8" , time: "2 hrs 20 mins ago" },
+        { name: "Juma", comment: "Nashukuru, nimepata back booster kwa dakika 9" , time: "2 hrs 30 mins ago" },
+        { name: "Asha", comment: "System hii ni legit, nimepokea boost yangu kwa dakika 10" , time: "2 hrs 40 mins ago" },
+        { name: "Hamza", comment: "Nashukuru kwa mfumo huu, nimepata boost kwa dakika 6" , time: "2 hrs 50 mins ago" },
+        { name: "Neema", comment: "Hii ni safi, nimepokea back booster kwa dakika 7" , time: "3 hrs ago" },
+        { name: "Juma", comment: "Ni legit, nimepata boost kwa dakika 4" , time: "3 hrs 10 mins ago" },
+        { name: "Kibwana", comment: "Nashukuru, nimepata back booster kwa dakika 10" , time: "3 hrs 20 mins ago" },
+        { name: "Maryam", comment: "Nashukuru kwa kuanzisha huu mfumo, nimepokea boost kwa dakika 8" , time: "3 hrs 30 mins ago" },
+        { name: "Ali", comment: "Hii ni safi sana, nimepata boost kwa dakika 9" , time: "3 hrs 40 mins ago" },
+        { name: "Zainabu", comment: "Nashukuru, nimepata back booster kwa dakika 6" , time: "3 hrs 50 mins ago" },
+        { name: "Fatuma", comment: "Ni mfumo wa kweli, nimepokea boost kwa dakika 7" , time: "4 hrs ago" },
+        { name: "Said", comment: "Nashukuru kwa msaada, nimepata boost kwa dakika 10" , time: "4 hrs 10 mins ago" },
+        { name: "Amani", comment: "Hii ni njia rahisi, nimepata back booster kwa dakika 5" , time: "4 hrs 20 mins ago" },
 
+        // Additional comments
+        { name: "Abdi M", comment: "Tunakupenda sana Zuchu, umeleta mfumo safi wa quick boost" , time: "Just now" },
+        { name: "Debora Tweve", comment: "Napenda mziki wako sana Zuchu, na hii program ni legit" , time: "Just now" },
+        { name: "Ann", comment: "Nimepata mtaji kupitia programu hii ya zuchu exchange, Nashkuru sana" , time: "Just now" },
+        { name: "Elizabeth", comment: "Nimelipa Kodi kupitia programu hii ya Zuchu, Asante sana Zuchu" , time: "Just now" },
+        { name: "Sarah", comment: "Nashukuru kwa mfumo huu wa kuleta maendeleo, nimepata boost kwa dakika chache" , time: "Just now" },
+        { name: "Saidi", comment: "Napenda sana mziki wako, na hii program imenisaidia kupata mtaji" , time: "Just now" },
+        { name: "Fatma J", comment: "Nimepata mtaji mkubwa kupitia hii program, Nashkuru sana Zuchu" , time: "Just now" },
+        { name: "Koletha", comment: "Nimepata msaada wa haraka sana, Nashkuru Zuchu kwa hili" , time: "Just now" }
+    ];
+
+    const commentsContainer = document.getElementById('comments');
+
+    // Generate comments
+    commentsData.forEach((data) => {
+        const commentEl = document.createElement('div');
+        commentEl.className = 'comment';
+        commentEl.innerHTML = `<strong>${data.name}</strong>: ${data.comment} <br><small>${data.time}</small>`;
+        commentsContainer.appendChild(commentEl);
+    });
+</script>
 </body>
-</html>
+  </html>
