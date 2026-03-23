@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>WhatsApp Pekee</title>
+<!-- Google Fonts for a modern font style -->
+<link href="https://fonts.googleapis.com/css2?family=Arial:wght@500&display=swap" rel="stylesheet" />
+<style>
+  body {
+    margin: 0;
+    padding: 40px;
+    font-family: 'Arial', sans-serif;
+    /* Bright purple background with subtle animation for cool effect */
+    background: linear-gradient(135deg, #9b30ff, #8a2be2);
+    background-size: 200% 200%;
+    animation: gradientShift 15s ease infinite;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  @keyframes gradientShift {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
+  }
+
+  h1 {
+    font-size: 3em;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+    font-family: 'Arial', sans-serif;
+  }
+
+  /* Stylish subtitle with a cool font and animated underline */
+  .subtitle {
+    font-family: 'Arial', sans-serif;
+    font-weight: 600;
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    position: relative;
+  }
+  .subtitle::after {
+    content: '';
+    display: block;
+    height: 3px;
+    width: 100px;
+    background: #ff69b4;
+    margin: 0 auto;
+    margin-top: 8px;
+    border-radius: 2px;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% {opacity: 1;}
+    50% {opacity: 0.5;}
+  }
+
+  p {
+    max-width: 800px;
+    text-align: center;
+    font-size: 1.2em;
+    line-height: 1.5;
+    margin-bottom: 30px;
+    padding: 0 20px;
+  }
+
+  /* Highlighted text for emphasis */
+  .highlight {
+    font-weight: bold;
+    color: #ff69b4;
+    font-family: 'Arial', sans-serif;
+  }
+
+  .phone-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+  }
+
+  .phone-number {
+    font-size: 2em;
+    font-weight: bold;
+    background: rgba(255,255,255,0.2);
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: default;
+    user-select: all;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  }
+
+  .copy-btn {
+    padding: 10px 20px;
+    background-color: #ff69b4; /* pink */
+    border: none;
+    border-radius: 8px;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .copy-btn:hover {
+    background-color: #ff85c1;
+  }
+
+  .confirmation {
+    font-size: 0.9em;
+    color: #fff;
+    margin-top: 10px;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .confirmation.show {
+    opacity: 1;
+  }
+
+  /* Add some cool hover effect for the entire page */
+  body:hover {
+    transform: scale(1.01);
+    transition: transform 0.3s ease;
+  }
+
+  /* Responsive adjustments */
+  @media(max-width: 600px){
+    h1 {
+      font-size: 2em;
+    }
+    p {
+      font-size: 1em;
+    }
+    .phone-number {
+      font-size: 1.5em;
+    }
+  }
+</style>
+</head>
+<body>
+
+<h1>WhatsApp Pekee</h1>
+
+<div class="subtitle">Welcome to Your Personal WhatsApp Hub!</div>
+
+<p>
+  <em>*Your welcome, hapana shaka wewe ni shabiki yangu na pia ni shabiki namba moja WCB wasafi.
+  Hawali ya yote utatakiwa kuisave namba hii itakusaidia wewe ambae ni mgeni wa hii programu ya Exchange money system.
+  Kuweza kuona na kutambua utaratibu, updates na mifano nilioweka ya watu ambao wamefuata utaratibu na kupata kupitia status zangu.
+  Kama unataka kuingia kwenye system mda huu sevu kwanza namba hii ndo uandike neno <span class="highlight">#NIWEZESHE</span> asanteni sana nawapenda_*</em>
+</p>
+
+<div class="phone-container">
+  <div class="phone-number" id="phoneNumber">0614927115</div>
+  <button class="copy-btn" id="copyButton">Copy</button>
+</div>
+<div class="confirmation" id="confirmationMsg">Nambari Imekopiwa</div>
+
+<script>
+  const copyBtn = document.getElementById('copyButton');
+  const phoneNumberDiv = document.getElementById('phoneNumber');
+  const confirmationMsg = document.getElementById('confirmationMsg');
+
+  copyBtn.addEventListener('click', () => {
+    const textToCopy = phoneNumberDiv.innerText;
+    navigator.clipboard.writeText(textToCopy).then(() => {
+      // Show confirmation message
+      confirmationMsg.classList.add('show');
+      // Hide after 2 seconds
+      setTimeout(() => {
+        confirmationMsg.classList.remove('show');
+      }, 2000);
+    }).catch(() => {
+      alert('Failed to copy the number. Please try manually.');
+    });
+  });
+</script>
+
+</body>
+  </html>
