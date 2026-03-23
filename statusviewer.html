@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>WhatsApp Status Simulator</title>
+<style>
+  body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background: #121212;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* Status Bars Container */
+  .status-bars {
+    display: flex;
+    justify-content: space-around;
+    width: 90%;
+    margin: 20px 0;
+    position: relative;
+  }
+
+  /* Individual Status Bar */
+  .status-bar {
+    flex: 1;
+    height: 4px;
+    background-color: rgba(255,255,255,0.3);
+    margin: 0 2px;
+    border-radius: 2px;
+    overflow: hidden;
+    cursor: pointer;
+  }
+
+  /* Progress Fill */
+  .progress {
+    height: 100%;
+    width: 0%;
+    background-color: #25D366; /* WhatsApp Green */
+    transition: width 0.1s linear;
+  }
+
+  /* Main Status Display */
+  .status-display {
+    position: relative;
+    width: 70%;
+    max-width: 400px;
+    min-height: 400px;
+    height: 70vh;
+    background-color: #222;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+
+  /* Navigation Buttons */
+  .nav-buttons {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+    padding: 0 15px;
+    box-sizing: border-box;
+    z-index: 10;
+  }
+
+  .nav-btn {
+    background-color: rgba(0,0,0,0.3);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 1.5em;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+
+  .nav-btn:hover {
+    background-color: rgba(0,0,0,0.6);
+  }
+
+  /* Content styling */
+  .status-content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2em;
+    text-align: center;
+    color: #fff;
+    position: relative;
+  }
+
+  /* Image styling */
+  .status-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+
+  /* Placeholder text style */
+  .message-text {
+    font-size: 1.2em;
+    padding: 10px;
+  }
+
+  /* WhatsApp info section (for status 8) */
+  .whatsapp-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .message {
+    font-size: 1.2em;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+
+  .number-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  .whatsapp-number {
+    font-size: 1.2em;
+    background-color: #25D366;
+    padding: 8px 12px;
+    border-radius: 8px;
+    color: #fff;
+    margin-right: 10px;
+    font-family: Arial, sans-serif;
+    cursor: default;
+  }
+
+  .copy-btn {
+    background-color: #075e54;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background-color 0.2s;
+  }
+
+  .copy-btn:hover {
+    background-color: #0b7a75;
+  }
+
+  /* Confirmation message after copy */
+  .copy-confirm {
+    font-size: 0.9em;
+    color: #0f0;
+    opacity: 0;
+    transition: opacity 0.3s;
+    position: absolute;
+    bottom: 20px;
+  }
+
+  .copy-confirm.show {
+    opacity: 1;
+  }
+
+  /* Responsive adjustments */
+  @media(max-width: 500px){
+    .status-display {
+      width: 90%;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- Status Bars -->
+<div class="status-bars" id="statusBars">
+  <!-- 8 status bars -->
+  <div class="status-bar" data-index="0"><div class="progress" id="progress0"></div></div>
+  <div class="status-bar" data-index="1"><div class="progress" id="progress1"></div></div>
+  <div class="status-bar" data-index="2"><div class="progress" id="progress2"></div></div>
+  <div class="status-bar" data-index="3"><div class="progress" id="progress3"></div></div>
+  <div class="status-bar" data-index="4"><div class="progress" id="progress4"></div></div>
+  <div class="status-bar" data-index="5"><div class="progress" id="progress5"></div></div>
+  <div class="status-bar" data-index="6"><div class="progress" id="progress6"></div></div>
+  <div class="status-bar" data-index="7"><div class="progress" id="progress7"></div></div>
+</div>
+
+<!-- Status Display -->
+<div class="status-display" id="statusDisplay">
+  <!-- Navigation Buttons -->
+  <div class="nav-buttons">
+    <button class="nav-btn" id="prevBtn" title="Previous">&lt;</button>
+    <button class="nav-btn" id="nextBtn" title="Next">&gt;</button>
+  </div>
+  <!-- Dynamic Content -->
+  <div class="status-content" id="statusContent">
+    <!-- Content will be injected by JS -->
+  </div>
+</div>
+
+<!-- Copy confirmation message -->
+<div id="copyMessage" class="copy-confirm">Nambari Imekopiwa</div>
+
+<script>
+  const statuses = [
+    { image: 'image1.jpg', text: 'Status 1' },
+    { image: 'image2.jpg', text: 'Status 2' },
+    { image: 'image3.jpg', text: 'Status 3' },
+    { image: 'image4.jpg', text: 'Status 4' },
+    { image: 'image5.jpg', text: 'Status 5' },
+    { image: 'image6.jpg', text: 'Status 6' },
+    { image: 'image7.jpg', text: 'Status 7' },
+    { // Status 8: special with message & copy
+      message: 'Ukiwa tayari ku-exchange, nitumie ujumbe kupitia WhatsApp',
+      isMessage: true,
+      number: '0788000000'
+    }
+  ];
+
+  const totalStatuses = statuses.length;
+  let currentIndex = 0;
+  const duration = 30000; // 30 sec
+  let timer = null;
+  const progressElements = [];
+  const progressBarsCount = 8;
+
+  // Initialize progress elements
+  for(let i=0; i<progressBarsCount; i++){
+    progressElements.push(document.getElementById('progress'+i));
+  }
+
+  const statusContentDiv = document.getElementById('statusContent');
+  const copyMessageDiv = document.getElementById('copyMessage');
+
+function loadStatus(index){
+    currentIndex = index;
+    if(currentIndex < 0) currentIndex=0;
+    if(currentIndex >= totalStatuses) currentIndex=totalStatuses-1;
+    // Reset progress bars
+    for(let i=0; i<progressBarsCount; i++){
+      progressElements[i].style.width='0%';
+    }
+    startProgressAnimation(currentIndex);
+    displayStatus(currentIndex);
+}
+
+// Display logic
+function displayStatus(index){
+  const item = statuses[index];
+  // Clear previous content
+  statusContentDiv.innerHTML='';
+
+  if(item.isMessage){
+    // Status 8: message + WhatsApp info
+    const container = document.createElement('div');
+    container.className='whatsapp-section';
+
+    const messageDiv = document.createElement('div');
+    messageDiv.className='message';
+    messageDiv.innerText= item.message;
+
+    const numberDiv = document.createElement('div');
+    numberDiv.className='number-container';
+
+    const numberSpan= document.createElement('span');
+    numberSpan.className='whatsapp-number';
+    numberSpan.innerText= item.number;
+
+    const copyBtn= document.createElement('button');
+    copyBtn.className='copy-btn';
+    copyBtn.innerText='Copy';
+
+    copyBtn.onclick=()=>{
+      navigator.clipboard.writeText(item.number).then(()=>{ showCopyMessage(); });
+    };
+
+    numberDiv.appendChild(numberSpan);
+    numberDiv.appendChild(copyBtn);
+
+    container.appendChild(messageDiv);
+    container.appendChild(numberDiv);
+    statusContentDiv.appendChild(container);
+  } else {
+    // Status 1-7: show image, fallback to color if error
+    const img= document.createElement('img');
+    img.src= item.image;
+    img.className='status-image';
+    img.onerror=()=>{
+      // fallback color placeholder
+      const color= getRandomColor();
+      const placeholder= document.createElement('div');
+      placeholder.className='message-text';
+      placeholder.innerText= item.text;
+      placeholder.style.backgroundColor= color;
+      placeholder.style.width='100%';
+      placeholder.style.height='100%';
+      placeholder.style.display='flex';
+      placeholder.style.justifyContent='center';
+      placeholder.style.alignItems='center';
+      placeholder.style.borderRadius='10px';
+      statusContentDiv.innerHTML=''; // clear
+      statusContentDiv.appendChild(placeholder);
+    };
+    statusContentDiv.appendChild(img);
+  }
+}
+
+function showCopyMessage(){
+  copyMessageDiv.classList.add('show');
+  setTimeout(()=>{
+    copyMessageDiv.classList.remove('show');
+  },2000);
+}
+
+function getRandomColor() {
+  const colors=['#e74c3c','#8e44ad','#3498db','#16a085','#f39c12','#d35400','#2ecc71','#f1c40f'];
+  return colors[Math.floor(Math.random() * colors.length)];
+}
+
+function startProgressAnimation(index){
+  if(timer) clearInterval(timer);
+  const startTime= Date.now();
+  timer= setInterval(()=>{
+    const elapsed= Date.now() - startTime;
+    const progressPercent= Math.min((elapsed/duration)*100, 100);
+    if(index< progressBarsCount){
+      progressElements[index].style.width= progressPercent + '%';
+    }
+    if(progressPercent>=100){
+      clearInterval(timer);
+      moveToNext();
+    }
+  }, 100);
+}
+
+function moveToNext(){
+  let nextIndex= currentIndex+1;
+  if(nextIndex>= totalStatuses) nextIndex=0;
+  loadStatus(nextIndex);
+}
+
+function moveToPrev(){
+  let prevIndex= currentIndex-1;
+  if(prevIndex<0) prevIndex= totalStatuses-1;
+  loadStatus(prevIndex);
+}
+
+// Event listeners
+document.getElementById('nextBtn').addEventListener('click', ()=>{
+  if(timer) clearInterval(timer);
+  moveToNext();
+});
+document.getElementById('prevBtn').addEventListener('click', ()=>{
+  if(timer) clearInterval(timer);
+  moveToPrev();
+});
+document.querySelectorAll('.status-bar').forEach(bar => {
+  bar.addEventListener('click', ()=>{
+    const index= parseInt(bar.getAttribute('data-index'));
+    if(timer) clearInterval(timer);
+    loadStatus(index);
+  });
+});
+
+// Initialize first status
+loadStatus(0);
+</script>
+</body>
+  </html>
