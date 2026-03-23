@@ -49,7 +49,7 @@
     width: 70%;
     max-width: 400px;
     min-height: 400px;
-    height: 70vh;
+    height: 75vh;
     background-color: #222;
     border-radius: 15px;
     overflow: hidden;
@@ -117,7 +117,7 @@
     padding: 10px;
   }
 
-  /* WhatsApp info section (for status 8) */
+  /* WhatsApp info section (for status 13) */
   .whatsapp-section {
     display: flex;
     flex-direction: column;
@@ -189,7 +189,7 @@
 
 <!-- Status Bars -->
 <div class="status-bars" id="statusBars">
-  <!-- 8 status bars -->
+  <!-- 13 status bars -->
   <div class="status-bar" data-index="0"><div class="progress" id="progress0"></div></div>
   <div class="status-bar" data-index="1"><div class="progress" id="progress1"></div></div>
   <div class="status-bar" data-index="2"><div class="progress" id="progress2"></div></div>
@@ -198,6 +198,11 @@
   <div class="status-bar" data-index="5"><div class="progress" id="progress5"></div></div>
   <div class="status-bar" data-index="6"><div class="progress" id="progress6"></div></div>
   <div class="status-bar" data-index="7"><div class="progress" id="progress7"></div></div>
+  <div class="status-bar" data-index="8"><div class="progress" id="progress8"></div></div>
+  <div class="status-bar" data-index="9"><div class="progress" id="progress9"></div></div>
+  <div class="status-bar" data-index="10"><div class="progress" id="progress10"></div></div>
+  <div class="status-bar" data-index="11"><div class="progress" id="progress11"></div></div>
+  <div class="status-bar" data-index="12"><div class="progress" id="progress12"></div></div>
 </div>
 
 <!-- Status Display -->
@@ -225,7 +230,12 @@
     { image: 'image5.jpg', text: 'Status 5' },
     { image: 'image6.jpg', text: 'Status 6' },
     { image: 'image7.jpg', text: 'Status 7' },
-    { // Status 8: special with message & copy
+    { image: 'image8.jpg', text: 'Status 8' },
+    { image: 'image9.jpg', text: 'Status 9' },
+    { image: 'image10.jpg', text: 'Status 10' },
+    { image: 'image11.jpg', text: 'Status 11' },
+    { image: 'image12.jpg', text: 'Status 12' },
+    { // Status 13: special with message & copy
       message: 'Ukiwa tayari ku-exchange, nitumie ujumbe kupitia WhatsApp',
       isMessage: true,
       number: '0788000000'
@@ -237,7 +247,7 @@
   const duration = 30000; // 30 sec
   let timer = null;
   const progressElements = [];
-  const progressBarsCount = 8;
+  const progressBarsCount = 13;
 
   // Initialize progress elements
   for(let i=0; i<progressBarsCount; i++){
@@ -248,9 +258,9 @@
   const copyMessageDiv = document.getElementById('copyMessage');
 
 function loadStatus(index){
-    currentIndex = index;
-    if(currentIndex < 0) currentIndex=0;
-    if(currentIndex >= totalStatuses) currentIndex=totalStatuses-1;
+    currentIndex= index;
+    if(currentIndex<0) currentIndex=0;
+    if(currentIndex>= totalStatuses) currentIndex= totalStatuses-1;
     // Reset progress bars
     for(let i=0; i<progressBarsCount; i++){
       progressElements[i].style.width='0%';
@@ -261,20 +271,19 @@ function loadStatus(index){
 
 // Display logic
 function displayStatus(index){
-  const item = statuses[index];
+  const item= statuses[index];
   // Clear previous content
   statusContentDiv.innerHTML='';
-
   if(item.isMessage){
-    // Status 8: message + WhatsApp info
-    const container = document.createElement('div');
+    // Status 13: message + WhatsApp info
+    const container= document.createElement('div');
     container.className='whatsapp-section';
 
-    const messageDiv = document.createElement('div');
+    const messageDiv= document.createElement('div');
     messageDiv.className='message';
     messageDiv.innerText= item.message;
 
-    const numberDiv = document.createElement('div');
+    const numberDiv= document.createElement('div');
     numberDiv.className='number-container';
 
     const numberSpan= document.createElement('span');
@@ -296,7 +305,7 @@ function displayStatus(index){
     container.appendChild(numberDiv);
     statusContentDiv.appendChild(container);
   } else {
-    // Status 1-7: show image, fallback to color if error
+    // Status 1-12: show image with fallback
     const img= document.createElement('img');
     img.src= item.image;
     img.className='status-image';
