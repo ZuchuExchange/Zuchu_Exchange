@@ -3,107 +3,417 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Zuchu Exchange System</title>
+<title>Zuchu Money Exchange</title>
+<!-- Google Fonts for a modern look -->
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
+<!-- Styles -->
 <style>
-  /* Make sure html and body fill the entire viewport */
-  html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-  }
-
   body {
-    font-family: Arial, sans-serif;
-    /* Background image settings to cover the entire screen */
-    background-image: url('zuchu1.jpg'); /* Your background image path */
-    background-size: cover; /* Ensures the image covers the entire background */
-    background-repeat: no-repeat;
-    background-position: center;
-    /* Optional: Use Flexbox to position content */
-    display: flex;
-    justify-content: center; /* Center horizontally */
-    align-items: flex-start; /* Align to top, change to 'center' if you want vertical center */
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    /* Deep vibrant blue background for a strong, friendly tone */
+    background-color: #003366;
+    color: #fff;
   }
 
-  /* Container to hold all content */
-  .content {
-    width: 100%;
-    max-width: 600px; /* Optional: limit width for readability */
+  /* Container */
+  .container {
+    max-width: 1000px;
+    margin: auto;
     padding: 20px;
-    box-sizing: border-box;
   }
 
-  .header {
-    background-color: rgba(250, 25, 266, 0.2);
-    color: white;
-    font-weight: bold;
-    font-size: 17px;
+  /* Header */
+  header {
+    text-align: center;
+    padding: 40px 20px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  }
+
+  header h1 {
+    font-size: 2.8em;
+    margin-bottom: 10px;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+  }
+
+  header p {
+    font-size: 1.2em;
+    color: #fff;
+  }
+
+  /* Introduction Section */
+  .intro {
+    margin-top: 30px;
+    background: rgba(255,255,255,0.2);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  }
+
+  .intro h2 {
+    text-align: center;
+    color: #fff;
+    margin-bottom: 20px;
+  }
+
+  .intro p {
+    font-size: 1.1em;
+    line-height: 1.6;
+    color: #fff;
+  }
+
+  /* Additional Mission Description */
+  .mission {
+    margin-top: 20px;
+    background: rgba(255,255,255,0.2);
     padding: 20px;
-    margin: 20px 0;
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    font-size: 1.1em;
+    color: #fff;
     text-align: center;
   }
 
-  .description {
-    background-color: rgba(250, 25, 255, 0.1);
-    color: white;
-    font-size: 15px;
-    font-weight: bold;
-    padding: 20px;
-    margin: 20px 0;
+  /* Form Styles */
+  .form-section {
+    margin-top: 40px;
+    background: rgba(255,255,255,0.15);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
   }
 
-  /* Style for ordered list */
-  ol {
-    padding-left: 20px; /* Indent for the list */
-    margin: 10px 0;
+  .form-section h3 {
+    text-align: center;
+    color: #fff;
+    margin-bottom: 25px;
   }
 
-  /* Style for list items */
-  ol li {
-    margin: 10px 0;
+  form {
+    display: flex;
+    flex-direction: column;
   }
 
-  .next-button {
-    display: block;
-    margin: 20px auto;
-    padding: 12px 24px;
-    background-color: #007bff;
-    color: white;
-    font-size: 12px;
-    font-weight: bold;
+  label {
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #fff;
+  }
+
+  input, select, textarea {
+    padding: 12px;
+    margin-bottom: 20px;
+    border-radius: 8px;
     border: none;
-    cursor: pointer;
-    border-radius: 30px;
+    font-size: 1em;
   }
 
-  /* Hover effect for button */
-  .next-button:hover {
-    background-color: #ADD8E6;
+  input:focus, select:focus, textarea:focus {
+    outline: none;
+    box-shadow: 0 0 8px rgba(255,255,255,0.7);
+  }
+
+  /* Friend Referral Group */
+  #referrer-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+  }
+
+  #referrer-group input {
+    flex: 1;
+  }
+
+  /* Hidden Fee Selection */
+  #fee-section {
+    display: none;
+    margin-top: 20px;
+    background: rgba(255,255,255,0.2);
+    padding: 20px;
+    border-radius: 15px;
+  }
+
+  #fee-section h4 {
+    text-align: center;
+    color: #fff;
+    margin-bottom: 15px;
+  }
+
+  .fee-description {
+    text-align: center;
+    font-size: 1em;
+    margin-bottom: 15px;
+    color: #fff;
+  }
+
+  .fee-options {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+  }
+
+  .fee-option {
+    background: #fff;
+    color: #333;
+    padding: 15px 25px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 180px;
+    text-align: center;
+    font-weight: 600;
+  }
+
+  .fee-option:hover, .fee-option.active {
+    background: #e67e22;
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  }
+
+  /* Final Button */
+  #pay-button {
+    display: none;
+    margin-top: 30px;
+    padding: 15px 30px;
+    font-size: 1.2em;
+    font-weight: 700;
+    color: #fff;
+    background-color: #27ae60;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+
+  #pay-button:hover {
+    background-color: #1e8449;
+  }
+
+  /* WhatsApp Contact Notification (small window) */
+  #whatsapp-alert {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #fff;
+    color: #333;
+    padding: 10px 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    font-size: 0.9em;
+    display: none;
+    z-index: 999;
+    max-width: 250px;
+    border: 2px solid #ccc;
+  }
+
+  /* Footer */
+  footer {
+    margin-top: 50px;
+    text-align: center;
+    padding: 20px;
+    color: #fff;
+    background: rgba(0,0,0,0.2);
+    border-radius: 15px;
+  }
+
+  /* WhatsApp contact link near logo - initially hidden */
+  .whatsapp-link {
+    display: inline-flex;
+    align-items: center;
+    background-color: #003366; /* same as body background for consistency */
+    padding: 8px 12px;
+    border-radius: 8px;
+    text-decoration: none;
+    margin-top: 20px;
+    font-weight: 600;
+    font-size: 1em;
+    display: none; /* hidden initially */
+  }
+
+  .whatsapp-link span {
+    color: #90ee90; /* Light green text */
+    border-bottom: 2px solid #fff; /* white line */
+    padding-bottom: 2px;
+    margin-left: 8px;
+  }
+
+  /* Responsive */
+  @media(max-width: 768px) {
+    .fee-options {
+      flex-direction: column;
+      align-items: center;
+    }
   }
 </style>
 </head>
 <body>
 
-<div class="content">
-  <div class="header" id="title1">
-    ZUCHU EXCHANGE SYSTEM
+<div class="container">
+
+  <!-- Header -->
+  <header>
+    <h1>💸ZUCHU EXCHANGE SYSTEM 🌟</h1>
+    <p>Zuchu Money Boost</p>
+  </header>
+
+  <!-- Introduction -->
+  <section class="intro">
+    <h2>Zuchu Exchange System</h2>
+    <p>
+      'Karibu Kwenye Zuchu Exchange System. Hii ni programu ya kusaidia na kuinua hali ya maisha ya shabiki zangu. Kupitia Programu hii utapokea hadi Laki Nane kwa ajili ya Ada,Mtaji au kukuza Biashara Yako. Natumia Programu hii kurudisha mkono kwa shabiki zangu kwa kunipa sapoti. Unapofanikiwa Unafaa Uwakumbuke Wale Walio Kufanya Ufike Hapo. Nitakuwa Sio Muungwana Kama Nitashindwa Kusaida Watu Walionifanya Nifike Hapa Kwa Support Mliyo Nipa Tangu Nianze Mpaka Hapa Nilipo.Thank You.'
+    </p>
+  </section>
+  
+  <!-- Mission Support Info -->
+  <div class="mission">
+    <p>
+      ZUCHU EXCHANGE SYSTEM ni programu unayowekeza kisha unapokea back boost ya uwekezaji wako. Programu hii ni halali na imeidhinishwa na BRELA. Kwa uthibitisho zaidi unaweza ukanivideo call kupitia WhatsApp.
+    </p>
   </div>
 
-  <div class="description" id="description1">
-    <p> 'Karibu Kwenye Zuchu Exchange System. Hii ni programu ya kusaidia na kuinua hali ya maisha ya mashabiki zangu. Kupitia Programu hii utapokea hadi Laki Nane kwa ajili ya Ada,Mtaji au kukuza Biashara Yako. Natumia Programu hii kurudisha mkono kwa shabiki zangu kwa kunipa sapoti. Unapofanikiwa Unafaa Uwakumbuke Wale Walio Kufanya Ufike Hapo. Nitakuwa Sio Muungwana Kama Nitashindwa Kusaida Watu Walionifanya Nifike Hapa Kwa Support Mliyo Nipa Tangu Nianze Mpaka Hapa Nilipo.Thank You.' ~ Zuchu </p>
+  <!-- Registration Form -->
+  <section class="form-section" id="registration-section">
+    <h3>Jisajili Hivi Sasa</h3>
+    <form id="donorForm">
+      <label for="fullName">Majina Yako Kamili</label>
+      <input type="text" id="fullName" name="fullName" placeholder="Happyness Sanga" required />
 
-  </div>
+      <label for="phone">Nambari Ya Simu</label>
+      <input type="tel" id="phone" name="phone" placeholder="06/07xxxxxxxx" required />
 
-  <button class="next-button" id="nextButton">Ingia</button>
+      <label for="idNumber">Nambari Ya Kitambulisho</label>
+      <input type="text" id="idNumber" name="idNumber" placeholder="" required />
+
+      <label for="age">Umri (18+)</label>
+      <input type="number" id="age" name="age" min="18" placeholder="28" required />
+
+      <label for="country">Mkoa</label>
+      <input type="text" id="country" name="country" placeholder="Mbeya" required />
+
+      <label for="job">Kazi/Ajira</label>
+      <input type="text" id="job" name="job" placeholder="Biashara" required />
+
+      <label for="email">BaruaPepe (Sio Lazima)</label>
+      <input type="email" id="email" name="email" placeholder="jovitha22@gmail.com" />
+
+      <div id="referrer-group">
+        <label for="referrer">Maelezo Zaidi(Sio Lazima)</label>
+        <input type="text" id="referrer" name="referrer" placeholder="Nauza Nguo" />
+      </div>
+
+      <button type="submit" style="background-color:#27ae60; color:#fff; padding:15px; border:none; border-radius:10px; font-size:1.2em; cursor:pointer; font-weight:600;">Jisajili</button>
+    </form>
+  </section>
+
+  <!-- Fee Selection (Hidden until details are filled) -->
+  <section id="fee-section">
+    <h4>Orodha Ya Uwekezaji</h4>
+    <div class="fee-description">
+      Huu ndio orodha ya uwekezaji. Kwa mfano ukituma Elfu 15 unapata Laki Moja. Chagua Kiwango unayoweza kulipia ada yake.Baada ya uwekezaji utapokea back boost baada ya dakika Tano Hadi Kumi kulingana na Mtandao.
+    </div>
+    <div class="fee-options" id="fee-options">
+      <div class="fee-option" data-fee="15" data-amount="USD 15">100,000 - 15,000</div>
+      <div class="fee-option" data-fee="25" data-amount="USD 25">200,000 - 20,000</div>
+      <div class="fee-option" data-fee="35" data-amount="USD 35">300,000 - 30,000</div>
+      <div class="fee-option" data-fee="45" data-amount="USD 45">400,000 - 40,000</div>
+      <div class="fee-option" data-fee="55" data-amount="USD 55">500,000 - 50,000</div>
+    </div>
+    <button id="pay-button">Niko Tayari Kuwekeza</button>
+  </section>
+
+  <!-- WhatsApp Contact Notification (small window) -->
+  <div id="whatsapp-alert">💬 Contact us on WhatsApp to complete your support process.</div>
+
+  <!-- WhatsApp Contact Button near logo - initially hidden -->
+  <a href="https://wa.me/+255616452569?text=Niko%20tayari%20kufanya%20malipo" target="_blank" class="whatsapp-link" id="whatsappLink">
+    <img src="https://img.icons8.com/ios-filled/24/ffffff/whatsapp.png" alt="WhatsApp" />
+    <span>Tuma Ujumbe WhatsApp</span>
+  </a>
+
+  <!-- Footer -->
+  <footer>
+    &copy; 2026 Zuchu Exchange System. All rights reserved.
+  </footer>
+
 </div>
 
+<!-- Scripts -->
 <script>
-  document.getElementById('nextButton').addEventListener('click', function() {
-    window.location.href = 'index2.html';
+  const form = document.getElementById('donorForm');
+  const feeSection = document.getElementById('fee-section');
+  const feeOptions = document.getElementById('fee-options');
+  const payButton = document.getElementById('pay-button');
+  const whatsappAlert = document.getElementById('whatsapp-alert');
+  const whatsappLink = document.getElementById('whatsappLink');
+
+  let selectedFee = null;
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const fullName = document.getElementById('fullName').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const idNumber = document.getElementById('idNumber').value.trim();
+    const age = parseInt(document.getElementById('age').value.trim(), 10);
+    const country = document.getElementById('country').value.trim();
+    const job = document.getElementById('job').value.trim();
+
+    if (!fullName || !phone || !idNumber || !age || !country || !job) {
+      alert('Jaza Fomu');
+      return;
+    }
+    if (age < 18) {
+      alert('Miaka 18 na zaidi.');
+      return;
+    }
+
+    // Show fee selection
+    document.getElementById('fee-section').style.display = 'block';
+    window.scrollTo({ top: feeSection.offsetTop - 20, behavior: 'smooth' });
   });
+
+  // Handle fee option click
+  Array.from(feeOptions.children).forEach(option => {
+    option.addEventListener('click', () => {
+      Array.from(feeOptions.children).forEach(opt => opt.classList.remove('active'));
+      option.classList.add('active');
+      selectedFee = option.getAttribute('data-fee');
+
+      // Show the "I am Ready to Pay" button
+      document.getElementById('pay-button').style.display = 'block';
+
+      // No alert here
+    });
+  });
+
+  // Handle "I am Ready to Pay" button click
+  document.getElementById('pay-button').addEventListener('click', () => {
+    if (selectedFee) {
+      // Show WhatsApp contact link
+      whatsappLink.style.display = 'inline-flex';
+
+      // Show alert to contact on WhatsApp
+      showWhatsAppAlert();
+
+    } else {
+      alert('Chagua Moja Kwenye Orodha.');
+    }
+  });
+
+  // Function to show the brief notification
+  function showWhatsAppAlert() {
+    whatsappAlert.style.display = 'block';
+    whatsappAlert.textContent = '💬 Nitumie Ujumbe Kupitia WhatsApp Kuendelea Na Process.';
+    setTimeout(() => {
+      whatsappAlert.style.display = 'none';
+    }, 2000);
+  }
 </script>
 
 </body>
-</html>
-
-  
+  </html>
